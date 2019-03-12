@@ -9,11 +9,19 @@
     <h:body>
         <h:form>
             <p:fieldset legend="Dashboard">
-                <p:panelGrid columns="2">
-                    <p:outputLabel></p:outputLabel>
-                    <p:inputText></p:inputText>
-                    <p:password></p:password>
+                <p:panelGrid columns="2" styleClass="">
+                    <p:outputLabel value="Nome"></p:outputLabel>
+                    <p:inputText value="#{usuarioBean.usuario.nome}"></p:inputText>
+                    <p:outputLabel value="Senha"></p:outputLabel>
+                    <p:password value="#{usuarioBean.usuario.senha}"></p:password>
+                    <h:outputText></h:outputText>
+                    <p:commandButton actionListener="#{usuarioBean.adicionarUsuario()}" value="Adicionar" update="@form"></p:commandButton>
                 </p:panelGrid>
+                <p:dataTable value="#{usuarioBean.usuarios}" var="user">
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{user.nome}"></h:outputText>
+                    </p:column>
+                </p:dataTable>
             </p:fieldset>
         </h:form>
     </h:body>

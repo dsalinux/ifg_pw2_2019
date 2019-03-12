@@ -1,12 +1,18 @@
 package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.entity.Usuario;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-public class UsuarioBean {
+@ManagedBean
+@SessionScoped
+public class UsuarioBean implements Serializable{
     
     private Usuario usuario;
     private List<Usuario> usuarios;
@@ -14,6 +20,7 @@ public class UsuarioBean {
     @PostConstruct
     public void init(){
         usuario = new Usuario();
+        usuarios = new ArrayList<>();   
     }
 
     public void adicionarUsuario(){

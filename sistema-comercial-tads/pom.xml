@@ -88,4 +88,11 @@
         </plugins>
     </build>
 
+<!--<repositories>
+    <repository>
+        <id>repository</id>
+        <url>http://10.8.233.73/repositorio</url>
+    </repository>
+</repositories>-->
+
 </project>
