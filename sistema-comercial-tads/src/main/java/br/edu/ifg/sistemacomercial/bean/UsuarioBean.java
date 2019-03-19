@@ -16,6 +16,7 @@ public class UsuarioBean implements Serializable{
     
     private Usuario usuario;
     private List<Usuario> usuarios;
+    private Long codigo = 1L;
     
     @PostConstruct
     public void init(){
@@ -24,6 +25,7 @@ public class UsuarioBean implements Serializable{
     }
 
     public void adicionarUsuario(){
+        usuario.setId(codigo++);
         usuarios.add(usuario);
         usuario = new Usuario();
         FacesContext context = FacesContext.getCurrentInstance();

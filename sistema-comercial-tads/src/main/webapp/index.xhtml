@@ -15,13 +15,24 @@
                     <p:outputLabel value="Senha"></p:outputLabel>
                     <p:password value="#{usuarioBean.usuario.senha}"></p:password>
                     <h:outputText></h:outputText>
-                    <p:commandButton actionListener="#{usuarioBean.adicionarUsuario()}" value="Adicionar" update="@form"></p:commandButton>
+                    <p:commandButton actionListener="#{usuarioBean.adicionarUsuario()}" 
+                                     value="Adicionar" update="@form"></p:commandButton>
                 </p:panelGrid>
+                
                 <p:dataTable value="#{usuarioBean.usuarios}" var="user">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{user.id}"></h:outputText>
+                    </p:column>                    
                     <p:column headerText="Nome">
                         <h:outputText value="#{user.nome}"></h:outputText>
                     </p:column>
+                    <p:column>
+                        <p:commandButton value="Delete" update="@form"
+                                         actionListener="#{usuarioBean.remover(user)}"></p:commandButton>
+                    </p:column>
                 </p:dataTable>
+                
             </p:fieldset>
         </h:form>
     </h:body>
