@@ -24,6 +24,12 @@
                     </p:toolbarGroup>
                 </p:toolbar>
                 
+                <!-- Mensagem em linha em baixo da toolbar -->
+                <p:messages autoUpdate="true" showDetail="true"></p:messages>
+                
+                <!-- Mensagem flutuante no canto superior direito -->
+                <p:growl autoUpdate="true" showDetail="true"></p:growl>
+                
                 <p:panelGrid columns="2" styleClass="ui-noborder" 
                              rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
                     
@@ -48,6 +54,8 @@
                     <p:column>
                         <p:commandButton value="Delete" update="@form"
                                          actionListener="#{usuarioBean.remover(user)}"></p:commandButton>
+                        <p:commandButton value="Editar" update="@form"
+                                         actionListener="#{usuarioBean.editar(user)}"></p:commandButton>
                     </p:column>
                 </p:dataTable>
                 

@@ -12,7 +12,7 @@ import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class UsuarioBean implements Serializable{
+public class UsuarioBean {
     
     private Usuario usuario;
     private List<Usuario> usuarios;
@@ -41,7 +41,12 @@ public class UsuarioBean implements Serializable{
         usuarios.add(usuario);
         usuario = new Usuario();
         FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Adicionado com sucesso.", "O usuário "+usuario.getNome()+" foi salvom com sucesso."));
+        FacesMessage fm = new FacesMessage(
+                FacesMessage.SEVERITY_INFO, 
+                "Adicionado com sucesso.", 
+                "O usuário "+usuario.getNome()+" foi salvom com sucesso.");
+        context.addMessage(null, fm);
+        pesquisar();
     }
     
     public void remover(Usuario usuario){
