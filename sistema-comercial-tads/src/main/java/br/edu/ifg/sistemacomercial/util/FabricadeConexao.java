@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class FabricadeConexao {
 
     private static Connection conexao;
-    private static final String URL = "jdbc:postgresql://localhost/siscom";
+    private static final String URL = "jdbc:postgresql://localhost/sistema-comercial";
     private static final String USUARIO = "postgres";
     private static final String SENHA = "root";
     

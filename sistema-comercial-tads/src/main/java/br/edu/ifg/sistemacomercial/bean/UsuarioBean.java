@@ -16,16 +16,28 @@ public class UsuarioBean implements Serializable{
     
     private Usuario usuario;
     private List<Usuario> usuarios;
-    private Long codigo = 1L;
+    private Status statusTela;
+    
+    private enum Status {
+        INSERINDO,
+        EDITANDO,
+        PESQUISANDO
+    }
+    
     
     @PostConstruct
     public void init(){
         usuario = new Usuario();
         usuarios = new ArrayList<>();   
+        statusTela = Status.PESQUISANDO;
+    }
+    
+    public void novo(){
+        statusTela = Status.INSERINDO;
+        usuario = new Usuario();
     }
 
     public void adicionarUsuario(){
-        usuario.setId(codigo++);
         usuarios.add(usuario);
         usuario = new Usuario();
         FacesContext context = FacesContext.getCurrentInstance();
@@ -38,6 +50,11 @@ public class UsuarioBean implements Serializable{
     public void editar(Usuario usuario){
         remover(usuario);
         this.usuario = usuario;
+        statusTela = Status.EDITANDO;
+    }
+    
+    public void pesquisar(){
+        statusTela = Status.PESQUISANDO;
     }
     
     public Usuario getUsuario() {
@@ -50,6 +67,10 @@ public class UsuarioBean implements Serializable{
 
     public List<Usuario> getUsuarios() {
         return usuarios;
+    }
+
+    public String getStatusTela() {
+        return statusTela.name();
     }
     
 }

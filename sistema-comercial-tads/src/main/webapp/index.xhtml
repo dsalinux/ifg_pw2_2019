@@ -9,7 +9,24 @@
     <h:body>
         <h:form>
             <p:fieldset legend="Dashboard">
-                <p:panelGrid columns="2" styleClass="ui-noborder">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Novo" actionListener="#{usuarioBean.novo()}"
+                                         update="@form"></p:commandButton>
+                        
+                        <p:commandButton value="Pesquisar" actionListener="#{usuarioBean.pesquisar()}"
+                                         update="@form"></p:commandButton>
+                        
+                        <p:commandButton value="Salvar" actionListener="#{usuarioBean.adicionarUsuario()}"
+                                         update="@form" 
+                                         rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
+                        
+                    </p:toolbarGroup>
+                </p:toolbar>
+                
+                <p:panelGrid columns="2" styleClass="ui-noborder" 
+                             rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
+                    
                     <p:outputLabel value="Nome"></p:outputLabel>
                     <p:inputText value="#{usuarioBean.usuario.nome}"></p:inputText>
                     <p:outputLabel value="Senha"></p:outputLabel>
@@ -19,7 +36,8 @@
                                      value="Adicionar" update="@form"></p:commandButton>
                 </p:panelGrid>
                 
-                <p:dataTable value="#{usuarioBean.usuarios}" var="user">
+                <p:dataTable value="#{usuarioBean.usuarios}" var="user"
+                             rendered="#{usuarioBean.statusTela == 'PESQUISANDO'}">
 
                     <p:column headerText="ID">
                         <h:outputText value="#{user.id}"></h:outputText>
