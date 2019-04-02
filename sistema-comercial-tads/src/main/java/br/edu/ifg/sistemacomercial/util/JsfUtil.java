@@ -14,9 +14,28 @@ public class JsfUtil implements Serializable{
     public void addMensagem(String resumo, String detalhe){
         addMensagem(FacesMessage.SEVERITY_INFO,resumo, detalhe);
     }
-    
     public void addMensagem(String resumo){
         addMensagem(resumo, null);
     }
     
+    public void addMensagemAviso(String resumo, String detalhe){
+        addMensagem(FacesMessage.SEVERITY_WARN, resumo, detalhe);
+    }
+    public void addMensagemAviso(String resumo){
+        addMensagemAviso(resumo, null);
+    }
+
+    public void addMensagemErro(String resumo, String detalhe){
+        addMensagem(FacesMessage.SEVERITY_ERROR, resumo, detalhe);
+    }
+    public void addMensagemErro(String resumo){
+        addMensagemErro(resumo, null);
+    }
+    
+    public void addMensagemFatal(String resumo, String detalhe){
+        addMensagem(FacesMessage.SEVERITY_FATAL, resumo, detalhe);
+    }
+    public void addMensagemFatal(String resumo){
+        addMensagemFatal(resumo, null);
+    }
 }

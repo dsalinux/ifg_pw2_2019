@@ -1,22 +1,26 @@
 package br.edu.ifg.sistemacomercial.bean;
 
+import br.edu.ifg.sistemacomercial.dao.UsuarioDAO;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
-import java.io.Serializable;
+import br.edu.ifg.sistemacomercial.util.JsfUtil;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 @ManagedBean
 @SessionScoped
-public class UsuarioBean {
+public class UsuarioBean extends JsfUtil{
     
     private Usuario usuario;
     private List<Usuario> usuarios;
     private Status statusTela;
+    
+    private UsuarioDAO usuarioDAO;
     
     private enum Status {
         INSERINDO,
@@ -30,6 +34,7 @@ public class UsuarioBean {
         usuario = new Usuario();
         usuarios = new ArrayList<>();   
         statusTela = Status.PESQUISANDO;
+        usuarioDAO = new UsuarioDAO();
     }
     
     public void novo(){
@@ -38,28 +43,42 @@ public class UsuarioBean {
     }
 
     public void adicionarUsuario(){
-        usuarios.add(usuario);
-        usuario = new Usuario();
-        FacesContext context = FacesContext.getCurrentInstance();
-        FacesMessage fm = new FacesMessage(
-                FacesMessage.SEVERITY_INFO, 
-                "Adicionado com sucesso.", 
-                "O usuário "+usuario.getNome()+" foi salvom com sucesso.");
-        context.addMessage(null, fm);
-        pesquisar();
+        try {
+            usuarioDAO.salvar(usuario);
+            usuario = new Usuario();
+            addMensagem("Salvo com sucesso!");
+            pesquisar();
+        } catch (SQLException ex) {
+            addMensagemErro(ex.getMessage());
+        }
     }
     
     public void remover(Usuario usuario){
-        usuarios.remove(usuario);
+        try {
+            usuarioDAO.deletar(usuario);
+        } catch (SQLException ex) {
+            addMensagemErro(ex.getMessage());
+        }
     }
     public void editar(Usuario usuario){
-        remover(usuario);
+        //remover(usuario);
         this.usuario = usuario;
         statusTela = Status.EDITANDO;
     }
     
     public void pesquisar(){
-        statusTela = Status.PESQUISANDO;
+        try {
+            if(!statusTela.equals(Status.PESQUISANDO)){
+                statusTela = Status.PESQUISANDO;
+                return;
+            }
+            usuarios = usuarioDAO.listar();
+            if(usuarios == null || usuarios.isEmpty()){
+                addMensagemAviso("Nenhum usuário cadastrado.");
+            }
+        } catch (SQLException ex) {
+            addMensagemErro(ex.getMessage());
+        }
     }
     
     public Usuario getUsuario() {

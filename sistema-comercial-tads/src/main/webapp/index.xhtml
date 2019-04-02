@@ -35,11 +35,14 @@
                     
                     <p:outputLabel value="Nome"></p:outputLabel>
                     <p:inputText value="#{usuarioBean.usuario.nome}"></p:inputText>
+                    <p:outputLabel value="Email"></p:outputLabel>
+                    <p:inputText value="#{usuarioBean.usuario.email}"></p:inputText>
+                    <p:outputLabel value="Login"></p:outputLabel>
+                    <p:inputText value="#{usuarioBean.usuario.login}"></p:inputText>
                     <p:outputLabel value="Senha"></p:outputLabel>
                     <p:password value="#{usuarioBean.usuario.senha}"></p:password>
-                    <h:outputText></h:outputText>
-                    <p:commandButton actionListener="#{usuarioBean.adicionarUsuario()}" 
-                                     value="Adicionar" update="@form"></p:commandButton>
+                    
+                    
                 </p:panelGrid>
                 
                 <p:dataTable value="#{usuarioBean.usuarios}" var="user"
@@ -50,6 +53,12 @@
                     </p:column>                    
                     <p:column headerText="Nome">
                         <h:outputText value="#{user.nome}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Email">
+                        <h:outputText value="#{user.email}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Login">
+                        <h:outputText value="#{user.login}"></h:outputText>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Delete" update="@form"
