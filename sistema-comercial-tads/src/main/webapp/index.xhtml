@@ -13,26 +13,26 @@
                     <p:toolbarGroup>
                         <p:commandButton value="Novo" actionListener="#{usuarioBean.novo()}"
                                          update="@form"></p:commandButton>
-                        
+
                         <p:commandButton value="Pesquisar" actionListener="#{usuarioBean.pesquisar()}"
                                          update="@form"></p:commandButton>
-                        
+
                         <p:commandButton value="Salvar" actionListener="#{usuarioBean.adicionarUsuario()}"
                                          update="@form" 
                                          rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
-                        
+
                     </p:toolbarGroup>
                 </p:toolbar>
-                
+
                 <!-- Mensagem em linha em baixo da toolbar -->
                 <p:messages autoUpdate="true" showDetail="true"></p:messages>
-                
+
                 <!-- Mensagem flutuante no canto superior direito -->
                 <p:growl autoUpdate="true" showDetail="true"></p:growl>
-                
+
                 <p:panelGrid columns="2" styleClass="ui-noborder" 
                              rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
-                    
+
                     <p:outputLabel value="Nome"></p:outputLabel>
                     <p:inputText value="#{usuarioBean.usuario.nome}"></p:inputText>
                     <p:outputLabel value="Email"></p:outputLabel>
@@ -41,10 +41,10 @@
                     <p:inputText value="#{usuarioBean.usuario.login}"></p:inputText>
                     <p:outputLabel value="Senha"></p:outputLabel>
                     <p:password value="#{usuarioBean.usuario.senha}"></p:password>
-                    
-                    
+
+
                 </p:panelGrid>
-                
+
                 <p:dataTable value="#{usuarioBean.usuarios}" var="user"
                              rendered="#{usuarioBean.statusTela == 'PESQUISANDO'}">
 
@@ -62,12 +62,18 @@
                     </p:column>
                     <p:column>
                         <p:commandButton value="Delete" update="@form"
-                                         actionListener="#{usuarioBean.remover(user)}"></p:commandButton>
+                                         actionListener="#{usuarioBean.remover(user)}">
+                            <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
+                        </p:commandButton>
+
                         <p:commandButton value="Editar" update="@form"
                                          actionListener="#{usuarioBean.editar(user)}"></p:commandButton>
                     </p:column>
                 </p:dataTable>
-                
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-trash-o" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-undo" />
+                </p:confirmDialog> 
             </p:fieldset>
         </h:form>
     </h:body>

@@ -56,6 +56,8 @@ public class UsuarioBean extends JsfUtil{
     public void remover(Usuario usuario){
         try {
             usuarioDAO.deletar(usuario);
+            usuarios.remove(usuario);
+            addMensagem("Deletado com sucesso!");
         } catch (SQLException ex) {
             addMensagemErro(ex.getMessage());
         }
