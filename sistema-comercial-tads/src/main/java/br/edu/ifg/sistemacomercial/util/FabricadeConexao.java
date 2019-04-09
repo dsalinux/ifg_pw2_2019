@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.flywaydb.core.Flyway;
 
 public class FabricadeConexao {
 
@@ -21,6 +22,8 @@ public class FabricadeConexao {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(FabricadeConexao.class.getName()).log(Level.SEVERE, null, ex);
             }
+            Flyway flyway = Flyway.configure().dataSource(URL, USUARIO, SENHA).load();
+            flyway.migrate();
             conexao = DriverManager.getConnection(URL, USUARIO, SENHA);
         }
         return conexao;
