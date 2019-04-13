@@ -2,7 +2,7 @@ CREATE TABLE public.categoria
 (
     id SERIAL primary key,    
     nome character varying(80) NOT NULL,
-    categoria_id integer NOT NULL REFERENCES public.categoria(id)
+    categoria_id integer REFERENCES public.categoria(id)
 );
 CREATE TABLE public.produto
 (
