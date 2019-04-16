@@ -16,6 +16,11 @@
     
     <dependencies>
         <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
+        </dependency>
+        <dependency>
             <groupId>org.primefaces</groupId>
             <artifactId>primefaces</artifactId>
             <version>6.2</version>
@@ -125,11 +130,11 @@
         </plugins>
     </build>
 
-    <!--<repositories>
+    <repositories>
         <repository>
-            <id>repository</id>
-            <url>http://10.8.233.73/repositorio</url>
+            <id>Primefaces</id>
+            <url>http://repository.primefaces.org</url>
         </repository>
-    </repositories>-->
+    </repositories>
 
 </project>
