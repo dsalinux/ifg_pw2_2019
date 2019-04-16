@@ -1,9 +1,7 @@
 package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.dao.CategoriaDAO;
-import br.edu.ifg.sistemacomercial.dao.ProdutoDAO;
 import br.edu.ifg.sistemacomercial.entity.Categoria;
-import br.edu.ifg.sistemacomercial.entity.Produto;
 import br.edu.ifg.sistemacomercial.util.JsfUtil;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,13 +14,12 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class ProdutoBean extends JsfUtil{
+public class CategoriaBean extends JsfUtil{
     
-    private Produto produto;
-    private List<Produto> produtos;
+    private Categoria categoria;
+    private List<Categoria> categorias;
     private Status statusTela;
     
-    private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
     
     private enum Status {
@@ -34,22 +31,21 @@ public class ProdutoBean extends JsfUtil{
     
     @PostConstruct
     public void init(){
-        produto = new Produto();
-        produtos = new ArrayList<>();   
+        categoria = new Categoria();
+        categorias = new ArrayList<>();   
         statusTela = Status.PESQUISANDO;
-        produtoDAO = new ProdutoDAO();
         categoriaDAO = new CategoriaDAO();
     }
     
     public void novo(){
         statusTela = Status.INSERINDO;
-        produto = new Produto();
+        categoria = new Categoria();
     }
 
-    public void adicionarProduto(){
+    public void adicionarCategoria(){
         try {
-            produtoDAO.salvar(produto);
-            produto = new Produto();
+            categoriaDAO.salvar(categoria);
+            categoria = new Categoria();
             addMensagem("Salvo com sucesso!");
             pesquisar();
         } catch (SQLException ex) {
@@ -57,18 +53,18 @@ public class ProdutoBean extends JsfUtil{
         }
     }
     
-    public void remover(Produto produto){
+    public void remover(Categoria categoria){
         try {
-            produtoDAO.deletar(produto);
-            produtos.remove(produto);
+            categoriaDAO.deletar(categoria);
+            categorias.remove(categoria);
             addMensagem("Deletado com sucesso!");
         } catch (SQLException ex) {
             addMensagemErro(ex.getMessage());
         }
     }
-    public void editar(Produto produto){
-        //remover(produto);
-        this.produto = produto;
+    public void editar(Categoria categoria){
+        //remover(categoria);
+        this.categoria = categoria;
         statusTela = Status.EDITANDO;
     }
     
@@ -78,8 +74,8 @@ public class ProdutoBean extends JsfUtil{
                 statusTela = Status.PESQUISANDO;
                 return;
             }
-            produtos = produtoDAO.listar();
-            if(produtos == null || produtos.isEmpty()){
+            categorias = categoriaDAO.listar();
+            if(categorias == null || categorias.isEmpty()){
                 addMensagemAviso("Nenhum usuário cadastrado.");
             }
         } catch (SQLException ex) {
@@ -87,29 +83,20 @@ public class ProdutoBean extends JsfUtil{
         }
     }
     
-    public Produto getProduto() {
-        return produto;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
     public String getStatusTela() {
         return statusTela.name();
     }
     
-    public List<Categoria> getCategorias(){
-        try {
-            return categoriaDAO.listar();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutoBean.class.getName()).log(Level.SEVERE, null, ex);
-            addMensagemErro(ex.getMessage());
-            return null;
-        }
-    }
 }

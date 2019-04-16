@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:outputLink value="faces/gerenciar-produto.xhtml">Gerenciar Produto</h:outputLink>
+            <h:outputLink value="faces/gerenciar-categoria.xhtml">Gerenciar Categoria</h:outputLink>
+            <p:fieldset legend="Dashboard">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Novo" actionListener="#{categoriaBean.novo()}"
+                                         update="@form"></p:commandButton>
+
+                        <p:commandButton value="Pesquisar" actionListener="#{categoriaBean.pesquisar()}"
+                                         update="@form"></p:commandButton>
+
+                        <p:commandButton value="Salvar" actionListener="#{categoriaBean.adicionarCategoria()}"
+                                         update="@form" 
+                                         rendered="#{categoriaBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
+
+                    </p:toolbarGroup>
+                </p:toolbar>
+
+                <!-- Mensagem em linha em baixo da toolbar -->
+                <p:messages autoUpdate="true" showDetail="true"></p:messages>
+
+                <!-- Mensagem flutuante no canto superior direito -->
+                <p:growl autoUpdate="true" showDetail="true"></p:growl>
+
+                <p:panelGrid columns="2" styleClass="ui-noborder" 
+                             rendered="#{categoriaBean.statusTela != 'PESQUISANDO'}">
+
+                    <p:outputLabel value="Nome"></p:outputLabel>
+                    <p:inputText value="#{categoriaBean.categoria.nome}"></p:inputText>
+
+
+                </p:panelGrid>
+
+                <p:dataTable value="#{categoriaBean.categorias}" var="user"
+                             rendered="#{categoriaBean.statusTela == 'PESQUISANDO'}">
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{user.id}"></h:outputText>
+                    </p:column>                    
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{user.nome}"></h:outputText>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Delete" update="@form"
+                                         actionListener="#{categoriaBean.remover(user)}">
+                            <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
+                        </p:commandButton>
+
+                        <p:commandButton value="Editar" update="@form"
+                                         actionListener="#{categoriaBean.editar(user)}"></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-trash-o" />
+                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-undo" />
+                </p:confirmDialog> 
+            </p:fieldset>
+        </h:form>
+    </h:body>
+</html>
+
