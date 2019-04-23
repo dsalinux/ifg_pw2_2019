@@ -16,7 +16,7 @@
                     <p:commandButton value="Pesquisar" actionListener="#{categoriaBean.pesquisar()}"
                                      update="@form"></p:commandButton>
 
-                    <p:commandButton value="Salvar" actionListener="#{categoriaBean.adicionarCategoria()}"
+                    <p:commandButton value="Salvar" actionListener="#{categoriaBean.adicionar()}"
                                      update="@form" 
                                      rendered="#{categoriaBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
 
@@ -33,12 +33,12 @@
                          rendered="#{categoriaBean.statusTela != 'PESQUISANDO'}">
 
                 <p:outputLabel value="Nome"></p:outputLabel>
-                <p:inputText value="#{categoriaBean.categoria.nome}"></p:inputText>
+                <p:inputText value="#{categoriaBean.entity.nome}"></p:inputText>
 
 
             </p:panelGrid>
 
-            <p:dataTable value="#{categoriaBean.categorias}" var="user"
+            <p:dataTable value="#{categoriaBean.entitys}" var="user"
                          rendered="#{categoriaBean.statusTela == 'PESQUISANDO'}">
 
                 <p:column headerText="ID">

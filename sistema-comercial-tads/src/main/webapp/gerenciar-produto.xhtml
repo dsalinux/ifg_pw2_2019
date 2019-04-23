@@ -19,7 +19,7 @@
                     <p:commandButton value="Pesquisar" actionListener="#{produtoBean.pesquisar()}"
                                      update="@form"></p:commandButton>
 
-                    <p:commandButton value="Salvar" actionListener="#{produtoBean.adicionarProduto()}"
+                    <p:commandButton value="Salvar" actionListener="#{produtoBean.adicionar()}"
                                      update="@form" 
                                      rendered="#{produtoBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
 
@@ -36,15 +36,15 @@
                          rendered="#{produtoBean.statusTela != 'PESQUISANDO'}">
 
                 <p:outputLabel value="Nome"></p:outputLabel>
-                <p:inputText value="#{produtoBean.produto.nome}"></p:inputText>
+                <p:inputText value="#{produtoBean.entity.nome}"></p:inputText>
                 <p:outputLabel value="Marca"></p:outputLabel>
-                <p:inputText value="#{produtoBean.produto.marca}"></p:inputText>
+                <p:inputText value="#{produtoBean.entity.marca}"></p:inputText>
                 <p:outputLabel value="Código de Barras"></p:outputLabel>
-                <p:inputText value="#{produtoBean.produto.codigoBarras}"></p:inputText>
+                <p:inputText value="#{produtoBean.entity.codigoBarras}"></p:inputText>
                 <p:outputLabel value="Unidade Medida"></p:outputLabel>
-                <p:inputText value="#{produtoBean.produto.unidadeMedida}" maxlength="2"></p:inputText>
+                <p:inputText value="#{produtoBean.entity.unidadeMedida}" maxlength="2"></p:inputText>
                 <p:outputLabel value="Categoria"></p:outputLabel>
-                <p:selectOneMenu value="#{produtoBean.produto.categoria}">
+                <p:selectOneMenu value="#{produtoBean.entity.categoria}">
                     <f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
                     <f:selectItems value="#{produtoBean.categorias}" var="cat" 
                                    itemLabel="#{cat.nome}" itemValue="#{cat}"></f:selectItems>
@@ -52,7 +52,7 @@
 
             </p:panelGrid>
 
-            <p:dataTable value="#{produtoBean.produtos}" var="produto"
+            <p:dataTable value="#{produtoBean.entitys}" var="produto"
                          rendered="#{produtoBean.statusTela == 'PESQUISANDO'}">
 
                 <p:column headerText="ID">

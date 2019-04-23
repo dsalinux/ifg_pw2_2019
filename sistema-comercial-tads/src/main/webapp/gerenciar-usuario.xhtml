@@ -17,7 +17,7 @@
                     <p:commandButton value="Pesquisar" actionListener="#{usuarioBean.pesquisar()}"
                                      update="@form"></p:commandButton>
 
-                    <p:commandButton value="Salvar" actionListener="#{usuarioBean.adicionarUsuario()}"
+                    <p:commandButton value="Salvar" actionListener="#{usuarioBean.adicionar()}"
                                      update="@form" 
                                      rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
 
@@ -34,18 +34,18 @@
                          rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
 
                 <p:outputLabel value="Nome"></p:outputLabel>
-                <p:inputText value="#{usuarioBean.usuario.nome}"></p:inputText>
+                <p:inputText value="#{usuarioBean.entity.nome}"></p:inputText>
                 <p:outputLabel value="Email"></p:outputLabel>
-                <p:inputText value="#{usuarioBean.usuario.email}"></p:inputText>
+                <p:inputText value="#{usuarioBean.entity.email}"></p:inputText>
                 <p:outputLabel value="Login"></p:outputLabel>
-                <p:inputText value="#{usuarioBean.usuario.login}"></p:inputText>
+                <p:inputText value="#{usuarioBean.entity.login}"></p:inputText>
                 <p:outputLabel value="Senha"></p:outputLabel>
-                <p:password value="#{usuarioBean.usuario.senha}"></p:password>
+                <p:password value="#{usuarioBean.entity.senha}"></p:password>
 
 
             </p:panelGrid>
 
-            <p:dataTable value="#{usuarioBean.usuarios}" var="user"
+            <p:dataTable value="#{usuarioBean.entitys}" var="user"
                          rendered="#{usuarioBean.statusTela == 'PESQUISANDO'}">
 
                 <p:column headerText="ID">

@@ -2,13 +2,14 @@ package br.edu.ifg.sistemacomercial.dao;
 
 import br.edu.ifg.sistemacomercial.entity.Categoria;
 import br.edu.ifg.sistemacomercial.util.FabricadeConexao;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriaDAO {
+public class CategoriaDAO implements Serializable{
 
     public void salvar(Categoria entity) throws SQLException{
         //Ordem das colunas: senha, nome, login, id, email
