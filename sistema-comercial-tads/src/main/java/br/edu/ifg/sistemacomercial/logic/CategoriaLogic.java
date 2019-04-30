@@ -2,7 +2,6 @@ package br.edu.ifg.sistemacomercial.logic;
 
 import br.edu.ifg.sistemacomercial.dao.CategoriaDAO;
 import br.edu.ifg.sistemacomercial.entity.Categoria;
-import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 
