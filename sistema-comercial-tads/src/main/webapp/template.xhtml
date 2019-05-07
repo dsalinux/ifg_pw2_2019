@@ -6,21 +6,60 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Sistema Comercial#{empty tituloPagina?'':' - '.concat(tituloPagina)}</title>
+        <h:outputStylesheet library="css" name="reset.css"></h:outputStylesheet>
+        <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
     </h:head>
-    <h:body>
-        <h:form>
-            <p:menubar>
-                <p:menuitem value="Dashboard" url="index.xhtml"></p:menuitem>
-                <p:submenu label="Cadastros">
-                    <p:menuitem value="Usuários" url="gerenciar-usuario.xhtml"></p:menuitem>
-                    <p:menuitem value="Categoria" url="gerenciar-categoria.xhtml"></p:menuitem>
-                    <p:menuitem value="Produto" url="gerenciar-produto.xhtml"></p:menuitem>
-                </p:submenu>
-            </p:menubar>
-        </h:form>
+    <h:body class="sidebar-open">
+        <header>
+            <div>
+                <a href="#" class="menu-button-toggle">
+                    <i class="fa fa-navicon"></i>
+                </a>
+            </div>
+            <div>
+                <h:graphicImage class="logo" library="imagens" name="logo.png"></h:graphicImage>
+            </div>
+            <div class="extras">
+                <div class="extras-item">
+                    <a href="#"><i class="fa fa-bell"></i></a>
+                </div>
+            </div>
+        </header>
         
-        <p:spacer height="30"></p:spacer>
-        <ui:insert></ui:insert>
+        <nav class="sidebar">
+            <div class="usuario">
+                <div class="foto">
+                    <img src="https://pt.gravatar.com/userimage/9502181/96f71df78b0a8ab4eb339a259d909a56.png?size=56"></img>
+                </div>
+                <div class="nome">
+                    João Pereira da Silva
+                </div>
+            </div>
+            <a href="index.xhtml" class="sidebar-item">
+                <i class="fa fa-fw fa-dashboard"></i>Dashboard
+            </a>
+            <a href="gerenciar-produto.xhtml" class="sidebar-item active">
+                <i class="fa fa-fw fa-cubes"></i>Gerenciar Produto
+            </a>
+            <a href="gerenciar-categoria.xhtml" class="sidebar-item">
+                <i class="fa fa-fw fa-tags"></i>Gerenciar Categoria
+            </a>
+            <a href="gerenciar-usuario.xhtml" class="sidebar-item">
+                <i class="fa fa-fw fa-users"></i>Gerenciar Usuarios
+            </a>
+        </nav>
+        
+        <main>
+            <ui:insert></ui:insert>
+        </main>
+        
+        <footer>
+            <div class="copyright">
+                Sicom - Sistema Comercial do TADS©
+            </div>
+        </footer>
+        <h:outputScript library="primefaces" name="jquery/jquery.js"></h:outputScript>
+        <h:outputScript library="js" name="geral.js"></h:outputScript>
     </h:body>
 </html>
 

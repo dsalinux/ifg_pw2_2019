@@ -9,7 +9,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 public class GenericDAO<E> implements Serializable {
-     @Inject
+    
+    @Inject
     private EntityManager entityManager;
     
     public E salvar(E entity) throws SQLException{
