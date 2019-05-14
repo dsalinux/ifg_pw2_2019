@@ -1,7 +1,7 @@
 CREATE TABLE public.categoria (
     id serial NOT NULL,
     nome varchar(40) NOT NULL,
-    categoria_id integer NOT NULL references public.categoria(id),
+    categoria_id integer references public.categoria(id),
     PRIMARY KEY (id)
 );
 
@@ -32,27 +32,27 @@ CREATE TABLE public.cliente (
     id serial NOT NULL,
     nome varchar NOT NULL,
     apelido_fantasia varchar,
-    cpf varchar,
-    rg varchar,
-    cnpj varchar,
-    inscricao varchar,
-    telefone1 varchar NOT NULL,
-    telefone2 varchar NOT NULL,
-    telefone3 varchar NOT NULL,
-    email varchar NOT NULL,
-    observacao varchar NOT NULL,
+    cpf varchar(20),
+    rg varchar(20),
+    cnpj varchar(20),
+    inscricao varchar(20),
+    telefone1 varchar(20),
+    telefone2 varchar(20),
+    telefone3 varchar(20),
+    email varchar(120),
+    observacao varchar(150) NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.endereco (
     id serial NOT NULL,
-    logradouro varchar NOT NULL,
-    numero varchar NOT NULL,
-    complemento varchar NOT NULL,
-    bairro varchar NOT NULL,
-    cidade varchar NOT NULL,
-    pais varchar NOT NULL,
-    cep varchar NOT NULL,
+    logradouro varchar(80) NOT NULL,
+    numero varchar(20) NOT NULL,
+    complemento varchar(60),
+    bairro varchar(80) NOT NULL,
+    cidade varchar(100) NOT NULL,
+    pais varchar(100) NOT NULL,
+    cep varchar(20) NOT NULL,
     cliente_id integer NOT NULL,
     cobranca boolean NOT NULL,
     PRIMARY KEY (id)
@@ -75,22 +75,22 @@ CREATE TABLE public.fornecedor (
     cpf varchar(20),
     inscricao varchar(20),
     rg varchar(20),
-    telefone1 varchar(20) NOT NULL,
-    telefone2 varchar(20) NOT NULL,
-    email varchar(120) NOT NULL,
-    website varchar(150) NOT NULL,
+    telefone1 varchar(20),
+    telefone2 varchar(20),
+    email varchar(120),
+    website varchar(150),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE public.movimento_estoque (
     id serial NOT NULL,
     produto_id integer NOT NULL references public.produto(id),
-    fornecedor_id integer NOT NULL references public.fornecedor(id),
+    fornecedor_id integer references public.fornecedor(id),
     tipo_movimento varchar(10) NOT NULL,
     data_movimento timestamp NOT NULL,
-    quantidade_recebida decimal NOT NULL,
+    quantidade decimal NOT NULL,
     preco_custo decimal(10,2) NOT NULL,
-    observacao varchar(100) NOT NULL,
+    observacao varchar(100),
     PRIMARY KEY (id)
 );
 
@@ -98,11 +98,12 @@ CREATE TABLE public.movimento_estoque (
 CREATE TABLE public.pedido (
     id serial NOT NULL,
     cliente_id integer NOT NULL references public.cliente(id),
+    endereco_entrega_id integer NOT NULL references public.endereco(id), 
     data_pedido date NOT NULL,
-    observacoes varchar(150) NOT NULL,
-    observacoes_cliente varchar(150) NOT NULL,
+    observacoes varchar(150),
+    observacoes_cliente varchar(150),
     usuario_id integer NOT NULL references public.usuario(id),
-    desconto decimal(10,2) NOT NULL,
+    desconto decimal(10,2),
     PRIMARY KEY (id)
 );
 
