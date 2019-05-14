@@ -70,16 +70,16 @@ body.sidebar-open {
 }
 body.sidebar-open nav.sidebar {
     left: 0px;
+    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 nav.sidebar {
-    left: -254px;
+    left: -250px;
     width: 250px;
     height: 100%;
     transition: left 0.5s;
     position: fixed;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     overflow: auto;
     background-color: #f0f0f0;
     z-index: 10;
