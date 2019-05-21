@@ -64,18 +64,8 @@ footer .copyright {
     line-height: 50px;
 }
 
-/*Menu Sidebar*/
-body.sidebar-open {
-    margin-left: 250px;
-}
-body.sidebar-open nav.sidebar {
-    left: 0px;
-    -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-nav.sidebar {
-    left: -250px;
+
+nav.sidebar { 
     width: 250px;
     height: 100%;
     transition: left 0.5s;
@@ -99,6 +89,36 @@ nav.sidebar a.sidebar-item:hover{
     transition: 0.3s;
 }
 
+@media(min-width: 701px) {
+    /*Menu Sidebar*/
+    body.sidebar-open {
+        margin-left: 250px;
+    }
+    body.sidebar-open nav.sidebar {
+        left: 0px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    nav.sidebar {
+        left: -250px;
+    }
+}
+@media(max-width: 700px) {
+    .menu-button-toggle{
+        z-index: 15;
+        position: absolute;
+    }
+    nav.sidebar-mob {
+        left: 0px;
+    }
+    body.sidebar-open nav.sidebar-mob {
+        left: -250px;
+    }
+    body.sidebar-open .menu-button-toggle{
+        position: relative;
+    }
+}
 
 nav.sidebar .usuario {
     padding-top: 20px;

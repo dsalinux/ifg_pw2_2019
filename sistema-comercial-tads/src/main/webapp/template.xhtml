@@ -6,6 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Sistema Comercial#{empty tituloPagina?'':' - '.concat(tituloPagina)}</title>
+        <meta name="viewport" content="width=device-width"></meta>
         <h:outputStylesheet library="css" name="reset.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
     </h:head>
@@ -26,7 +27,7 @@
             </div>
         </header>
         
-        <nav class="sidebar">
+        <nav class="sidebar sidebar-mob">
             <div class="usuario">
                 <div class="foto">
                     <img src="https://pt.gravatar.com/userimage/9502181/96f71df78b0a8ab4eb339a259d909a56.png?size=56"></img>

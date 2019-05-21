@@ -2,6 +2,7 @@ package br.edu.ifg.sistemacomercial.logic;
 
 import br.edu.ifg.sistemacomercial.dao.UsuarioDAO;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -13,10 +14,13 @@ public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
     @Override
     public Usuario salvar(Usuario entity) throws Exception {
         if("".equals(entity.getNome().trim())){
-            throw new Exception("Nome da categoria é obrigatório.");
+            throw new Exception("Nome do usuário é obrigatório.");
         }
-        dao.salvar(entity);
-        return null;
+        if(entity.getDataCadastro() == null){
+            entity.setDataCadastro(new Date());
+        }
+        entity = dao.salvar(entity);
+        return entity;
     }
 
     @Override

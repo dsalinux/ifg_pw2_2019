@@ -37,10 +37,8 @@
                 <p:inputText value="#{usuarioBean.entity.nome}"></p:inputText>
                 <p:outputLabel value="Email"></p:outputLabel>
                 <p:inputText value="#{usuarioBean.entity.email}"></p:inputText>
-                <p:outputLabel value="Login"></p:outputLabel>
-                <p:inputText value="#{usuarioBean.entity.login}"></p:inputText>
                 <p:outputLabel value="Senha"></p:outputLabel>
-                <p:password value="#{usuarioBean.entity.senha}"></p:password>
+                <p:password value="#{usuarioBean.senha}"></p:password>
 
 
             </p:panelGrid>
@@ -57,9 +55,6 @@
                 <p:column headerText="Email">
                     <h:outputText value="#{user.email}"></h:outputText>
                 </p:column>
-                <p:column headerText="Login">
-                    <h:outputText value="#{user.login}"></h:outputText>
-                </p:column>
                 <p:column>
                     <p:commandButton value="Delete" update="@form"
                                      actionListener="#{usuarioBean.remover(user)}">
@@ -68,6 +63,8 @@
 
                     <p:commandButton value="Editar" update="@form"
                                      actionListener="#{usuarioBean.editar(user)}"></p:commandButton>
+                    <p:commandButton value="#{user.dataDesativacao == null?'Desativar':'Ativar'}" update="@form"
+                                     actionListener="#{usuarioBean.ativarDesativar(user)}"></p:commandButton>
                 </p:column>
             </p:dataTable>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">

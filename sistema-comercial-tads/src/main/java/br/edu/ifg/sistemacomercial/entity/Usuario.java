@@ -1,6 +1,7 @@
 package br.edu.ifg.sistemacomercial.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "usuario")
@@ -16,12 +19,16 @@ public class Usuario implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column
     private String nome;
-    @Column(name="login")
-    private String login;
     private String senha;
     private String email;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name="data_cadastro")
+    private Date dataCadastro;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="data_desativacao")
+    private Date dataDesativacao;
 
     public Long getId() {
         return id;
@@ -39,14 +46,6 @@ public class Usuario implements Serializable{
         this.nome = nome;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getSenha() {
         return senha;
     }
@@ -61,6 +60,22 @@ public class Usuario implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Date getDataDesativacao() {
+        return dataDesativacao;
+    }
+
+    public void setDataDesativacao(Date dataDesativacao) {
+        this.dataDesativacao = dataDesativacao;
     }
 
     @Override
