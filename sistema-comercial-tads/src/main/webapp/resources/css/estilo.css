@@ -111,9 +111,15 @@ nav.sidebar a.sidebar-item:hover{
     }
     nav.sidebar-mob {
         left: 0px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     }
     body.sidebar-open nav.sidebar-mob {
         left: -250px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
     }
     body.sidebar-open .menu-button-toggle{
         position: relative;
