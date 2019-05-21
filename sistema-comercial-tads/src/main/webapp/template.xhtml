@@ -36,16 +36,17 @@
                     João Pereira da Silva
                 </div>
             </div>
-            <a href="index.xhtml" class="sidebar-item">
+            <a href="index.xhtml" class="sidebar-item #{view.viewId.endsWith('index.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-dashboard"></i>Dashboard
+                
             </a>
-            <a href="gerenciar-produto.xhtml" class="sidebar-item active">
+            <a href="gerenciar-produto.xhtml" class="sidebar-item #{view.viewId.endsWith('gerenciar-produto.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-cubes"></i>Gerenciar Produto
             </a>
-            <a href="gerenciar-categoria.xhtml" class="sidebar-item">
+            <a href="gerenciar-categoria.xhtml" class="sidebar-item #{view.viewId.endsWith('gerenciar-categoria.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-tags"></i>Gerenciar Categoria
             </a>
-            <a href="gerenciar-usuario.xhtml" class="sidebar-item">
+            <a href="gerenciar-usuario.xhtml" class="sidebar-item #{view.viewId.endsWith('gerenciar-usuario.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-users"></i>Gerenciar Usuarios
             </a>
         </nav>
@@ -59,6 +60,15 @@
                 Sicom - Sistema Comercial do TADS©
             </div>
         </footer>
+        
+        <!-- Componentes Extras -->
+        <h:form>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-trash-o" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-undo" />
+            </p:confirmDialog> 
+        </h:form>
+        
         <h:outputScript library="primefaces" name="jquery/jquery.js"></h:outputScript>
         <h:outputScript library="js" name="geral.js"></h:outputScript>
     </h:body>

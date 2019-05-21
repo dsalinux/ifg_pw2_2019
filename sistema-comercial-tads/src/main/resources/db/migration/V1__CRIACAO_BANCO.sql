@@ -1,3 +1,4 @@
+/* Implementaçãdo do sistema */
 CREATE TABLE public.categoria (
     id serial NOT NULL,
     nome varchar(40) NOT NULL,
