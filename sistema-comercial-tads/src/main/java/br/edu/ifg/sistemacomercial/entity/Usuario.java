@@ -2,12 +2,16 @@ package br.edu.ifg.sistemacomercial.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,6 +33,12 @@ public class Usuario implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="data_desativacao")
     private Date dataDesativacao;
+    
+    @ManyToMany
+    @JoinTable(name = "usuario_has_permissao", 
+            joinColumns = @JoinColumn(name="usuario_id"),
+            inverseJoinColumns = @JoinColumn(name="permissao_id"))
+    private List<Permissao> permissoes;
 
     public Long getId() {
         return id;
@@ -78,6 +88,22 @@ public class Usuario implements Serializable{
         this.dataDesativacao = dataDesativacao;
     }
 
+    public List<Permissao> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setPermissoes(List<Permissao> permissoes) {
+        this.permissoes = permissoes;
+    }
+    
+    public String getPermissoesString(){
+        StringBuilder builder = new StringBuilder();
+        for (Permissao permissao : permissoes) {
+            builder.append(permissao.getNome()).append(",");
+        }
+        return builder.toString();
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

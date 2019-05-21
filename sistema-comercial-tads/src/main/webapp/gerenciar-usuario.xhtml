@@ -43,6 +43,9 @@
                 <p:column headerText="Email">
                     <h:outputText value="#{user.email}"></h:outputText>
                 </p:column>
+                <p:column headerText="Permissoes">
+                    <h:outputText value="#{user.permissoesString}"></h:outputText>
+                </p:column>
                 <p:column>
                     <p:commandButton value="Delete" update="@form"
                                      actionListener="#{usuarioBean.remover(user)}">

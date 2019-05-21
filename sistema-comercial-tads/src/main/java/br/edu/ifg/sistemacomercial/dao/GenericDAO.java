@@ -35,4 +35,9 @@ public class GenericDAO<E> implements Serializable {
         
         return (Class<E>) paramType.getActualTypeArguments()[0];        
     }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+    
 }

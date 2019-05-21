@@ -35,7 +35,8 @@ public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
 
     @Override
     public List<Usuario> buscar(Usuario entity) throws Exception {
-        return dao.listar();
+        List<Usuario> usuarios = dao.listar();
+        return usuarios;
     }
     
 }
