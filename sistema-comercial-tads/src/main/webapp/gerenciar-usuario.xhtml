@@ -34,8 +34,8 @@
             <p:dataTable value="#{usuarioBean.entitys}" var="user"
                          rendered="#{usuarioBean.statusTela == 'PESQUISANDO'}">
 
-                <p:column headerText="ID">
-                    <h:outputText value="#{user.id}"></h:outputText>
+                <p:column width="32">
+                    <img class="table-image" src="https://www.gravatar.com/avatar/#{user.emailHash}?s=32&amp;d=mp"></img>
                 </p:column>                    
                 <p:column headerText="Nome">
                     <h:outputText value="#{user.nome}"></h:outputText>

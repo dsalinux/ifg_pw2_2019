@@ -4,22 +4,25 @@ html, body{ height:100%; margin:0; }
 body{ 
     display:flex; 
     flex-direction:column;
-    transition: margin 0.5s;
 }
 footer{
     margin-top:auto; 
 }
 
-/*Designe*/
+
+/*Designe do header*/
 header{
-    min-height:50px;
+    position: fixed;
+    width: 100%;
+    height:50px;
+    z-index: 10;
     -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
     background-color: #344f63;
-    background-image: -webkit-gradient(linear, left top, right top, from(#57b690), to(#30415d));
-    background-image: -webkit-linear-gradient(left, #57b690, #30415d);
-    background-image: linear-gradient(to right, #57b690, #30415d);
+    background-image: -webkit-gradient(linear, left top, right top, from(#22506B), to(#123A52));
+    background-image: -webkit-linear-gradient(left, #22506B, #123A52);
+    background-image: linear-gradient(to right, #22506B, #123A52);
 }
 header > div {
     float: left;
@@ -27,6 +30,7 @@ header > div {
 header .logo {
     padding-top: 7px;
 }
+
 .menu-button-toggle {
     font-size: 30px;
     line-height: 50px;
@@ -55,6 +59,15 @@ header .extras .extras-item:hover {
     background-color: rgba(255,255,255,0.1);
 }
 
+
+/*Ajusta o main para ficar abaixo do header*/
+main {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+
+/*Ajustes do footer*/
 footer{
     min-height:50px;
     background:#eee;
@@ -65,74 +78,77 @@ footer .copyright {
 }
 
 
+/*Configurações da navbar*/
+/* Adiciona transição suave na sidebar */
+nav.sidebar, main, footer { 
+    transition: margin 0.5s;
+}
 nav.sidebar { 
     width: 250px;
     height: 100%;
+    top: 50px;
     transition: left 0.5s;
     position: fixed;
     overflow: auto;
-    background-color: #f0f0f0;
+    background-color: #142837;
     z-index: 10;
 }
 nav.sidebar a.sidebar-item{
     display: block;
     padding: 20px 0px 20px 10px;
     text-decoration: none;
-    color: #333;
+    color: #eee;
+/*    color: #333;*/
 }
 nav.sidebar a.sidebar-item.active{
-    border-left: 8px solid #57b690;
+    border-left: 8px solid #22506B;
 }
 nav.sidebar a.sidebar-item:hover{
-    background-color: #57b690;
+    background-color: #33779E;
     color: white;
     transition: 0.3s;
 }
 
 @media(min-width: 701px) {
-    /*Menu Sidebar*/
-    body.sidebar-open {
-        margin-left: 250px;
-    }
-    body.sidebar-open nav.sidebar {
-        left: 0px;
-        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
     nav.sidebar {
-        left: -250px;
-    }
-}
-@media(max-width: 700px) {
-    .menu-button-toggle{
-        z-index: 15;
-        position: absolute;
-    }
-    nav.sidebar-mob {
-        left: 0px;
-        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-    }
-    body.sidebar-open nav.sidebar-mob {
         left: -250px;
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
         box-shadow: none;
     }
-    body.sidebar-open .menu-button-toggle{
-        position: relative;
+    .sidebar-active nav.sidebar  {
+        left: 0px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .sidebar-active main, .sidebar-active footer {
+        margin-left: 250px;
+    }
+}
+@media(max-width: 700px) {
+
+    nav.sidebar {
+        left: -250px;
+        -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    .sidebar-open nav.sidebar {
+        left: 0px;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
     }
 }
 
 nav.sidebar .usuario {
     padding-top: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #aaa;
     background-image: -webkit-gradient(linear, left top, right top, from(#57b690), to(#146fab));
     background-image: -webkit-linear-gradient(left top, #57b690, #146fab);
-    background-image: linear-gradient(to right bottom, #57b690, #146fab);
+    background-image: linear-gradient(to right bottom, #33779E, #22506B);
+    color: white;
 }
 
 nav.sidebar .usuario  .foto{
@@ -152,9 +168,5 @@ nav.sidebar .usuario  .foto > img{
 }
 nav.sidebar .usuario .nome {
     text-align: center;
-    color: #333;
     padding: 10px 0 20px 0;
-}
-main {
-    padding: 20px;
 }

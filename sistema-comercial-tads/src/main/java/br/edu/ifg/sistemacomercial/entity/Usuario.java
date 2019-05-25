@@ -1,5 +1,6 @@
 package br.edu.ifg.sistemacomercial.entity;
 
+import br.edu.ifg.sistemacomercial.util.MD5Util;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -96,8 +97,18 @@ public class Usuario implements Serializable{
         this.permissoes = permissoes;
     }
     
+    public String getEmailHash(){
+        if(email == null){
+            return null;
+        }
+        return MD5Util.md5Hex(email);
+    }
+    
     public String getPermissoesString(){
         StringBuilder builder = new StringBuilder();
+        if(permissoes == null){
+            return null;
+        }
         for (Permissao permissao : permissoes) {
             builder.append(permissao.getNome()).append(",");
         }

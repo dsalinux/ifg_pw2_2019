@@ -37,6 +37,15 @@
             <p:dataTable value="#{categoriaBean.entitys}" var="cat"
                          rendered="#{categoriaBean.statusTela == 'PESQUISANDO'}">
 
+                <p:column width="100">
+                    <p:commandButton icon="fa fa-trash" update="@form"
+                                     actionListener="#{categoriaBean.remover(cat)}">
+                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
+                    </p:commandButton>
+
+                    <p:commandButton icon="fa fa-edit" update="@form"
+                                     actionListener="#{categoriaBean.editar(cat)}"></p:commandButton>
+                </p:column>
                 <p:column headerText="ID">
                     <h:outputText value="#{cat.id}"></h:outputText>
                 </p:column>                    
@@ -45,15 +54,6 @@
                 </p:column>
                 <p:column headerText="Categoria Superior">
                     <h:outputText value="#{cat.categoria.nome}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Delete" update="@form"
-                                     actionListener="#{categoriaBean.remover(cat)}">
-                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
-                    </p:commandButton>
-
-                    <p:commandButton value="Editar" update="@form"
-                                     actionListener="#{categoriaBean.editar(cat)}"></p:commandButton>
                 </p:column>
             </p:dataTable>
             
