@@ -48,12 +48,12 @@
                 </p:column>
                 <p:column>
                     <p:commandButton value="Delete" update="@form"
-                                     actionListener="#{categoriaBean.remover(user)}">
+                                     actionListener="#{categoriaBean.remover(cat)}">
                         <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
                     </p:commandButton>
 
                     <p:commandButton value="Editar" update="@form"
-                                     actionListener="#{categoriaBean.editar(user)}"></p:commandButton>
+                                     actionListener="#{categoriaBean.editar(cat)}"></p:commandButton>
                 </p:column>
             </p:dataTable>
             
