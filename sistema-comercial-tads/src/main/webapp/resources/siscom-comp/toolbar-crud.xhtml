@@ -13,7 +13,7 @@
 
     <!-- IMPLEMENTATION -->
     <cc:implementation>
-        <p:toolbar>
+        <p:toolbar id="toolbaraction">
             <p:toolbarGroup>
                 <p:commandButton value="Novo" actionListener="#{cc.attrs.crudBean.novo()}"
                                  update="@form"></p:commandButton>
@@ -21,7 +21,7 @@
                 <p:commandButton value="Pesquisar" actionListener="#{cc.attrs.crudBean.pesquisar()}"
                                  update="@form"></p:commandButton>
 
-                <p:commandButton value="Salvar" actionListener="#{cc.attrs.crudBean.adicionar()}"
+                <p:commandButton value="Salvar" actionListener="#{cc.attrs.crudBean.salvar()}"
                                  update="@form" 
                                  rendered="#{cc.attrs.crudBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
 

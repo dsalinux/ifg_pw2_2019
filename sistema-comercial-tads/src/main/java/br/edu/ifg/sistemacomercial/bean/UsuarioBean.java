@@ -19,11 +19,11 @@ public class UsuarioBean extends GenericCrud<Usuario, UsuarioLogic>{
     private String senha;
 
     @Override
-    public void adicionar() {
+    public void salvar() {
         if(senha != null && !"".equals(senha.trim())){
             getEntity().setSenha(senha);
         }
-        super.adicionar();
+        super.salvar();
     }
     
     public void ativarDesativar(Usuario usuario){

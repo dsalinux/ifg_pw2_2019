@@ -39,8 +39,18 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
         
     }
 
-    public void adicionar(){
+    public void metodoLento(){
+        long milisAtuais = System.currentTimeMillis();
+        long milisDepois = milisAtuais+2000;
+        while(milisAtuais < milisDepois){
+            //Fica atualizando o milis
+            milisAtuais = System.currentTimeMillis();
+        }
+    }
+    
+    public void salvar(){
         try {
+            metodoLento();
             getLogic().salvar(entity);
             addMensagem("Salvo com sucesso!");
             pesquisar();

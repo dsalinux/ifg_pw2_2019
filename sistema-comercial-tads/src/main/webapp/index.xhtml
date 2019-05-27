@@ -8,6 +8,8 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+    <!--Spinkit retirado de: https://tobiasahlin.com/spinkit/-->
+    <h:outputStylesheet library="css" name="spinkit.css"></h:outputStylesheet>
     <h1>Bem vindo ao Sistema Comercial.</h1>
 
     <h:form>
@@ -16,19 +18,39 @@
         </p:messages>
         <p:commandButton value="Botão com método lento" actionListener="#{testeBean.metodoLento()}"></p:commandButton>
     </h:form>
-<!--    <p:ajaxStatus>
-        <f:facet name="default">
-            <h:outputText value="Status: StandBy" />
-        </f:facet>
+    <!--    <p:ajaxStatus>
+            <f:facet name="default">
+                <h:outputText value="Status: StandBy" />
+            </f:facet>
+    
+            <f:facet name="start">
+                <h:outputText value="Status: Processando..." />
+            </f:facet>
+    
+            <f:facet name="complete">
+                <h:outputText value="Status: Completed" />
+            </f:facet>
+        </p:ajaxStatus>-->
 
-        <f:facet name="start">
-            <h:outputText value="Status: Processando..." />
-        </f:facet>
+    <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
 
-        <f:facet name="complete">
-            <h:outputText value="Status: Completed" />
-        </f:facet>
-    </p:ajaxStatus>-->
+    <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+        <div class="sk-fading-circle">
+            <div class="sk-circle1 sk-circle"></div>
+            <div class="sk-circle2 sk-circle"></div>
+            <div class="sk-circle3 sk-circle"></div>
+            <div class="sk-circle4 sk-circle"></div>
+            <div class="sk-circle5 sk-circle"></div>
+            <div class="sk-circle6 sk-circle"></div>
+            <div class="sk-circle7 sk-circle"></div>
+            <div class="sk-circle8 sk-circle"></div>
+            <div class="sk-circle9 sk-circle"></div>
+            <div class="sk-circle10 sk-circle"></div>
+            <div class="sk-circle11 sk-circle"></div>
+            <div class="sk-circle12 sk-circle"></div>
+        </div>
+        <div class="texto-processando">Processando...</div>
+    </p:dialog>
 
 </ui:composition>
 
