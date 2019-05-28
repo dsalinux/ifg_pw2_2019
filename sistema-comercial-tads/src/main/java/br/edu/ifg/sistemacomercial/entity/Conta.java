@@ -6,22 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categoria")
-public class Categoria implements Serializable {
-    
+@Table(name = "conta")
+public class Conta implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String nome;
-    
-    @ManyToOne
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
 
     public Integer getId() {
         return id;
@@ -39,17 +34,9 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-    
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 5;
         hash = 59 * hash + Objects.hashCode(this.id);
         return hash;
     }
@@ -65,13 +52,11 @@ public class Categoria implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Categoria other = (Categoria) obj;
+        final Conta other = (Conta) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-    
-    
-    
+
 }

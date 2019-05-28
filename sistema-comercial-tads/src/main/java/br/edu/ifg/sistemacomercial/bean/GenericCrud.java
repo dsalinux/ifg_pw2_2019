@@ -39,23 +39,14 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
         
     }
 
-    public void metodoLento(){
-        long milisAtuais = System.currentTimeMillis();
-        long milisDepois = milisAtuais+2000;
-        while(milisAtuais < milisDepois){
-            //Fica atualizando o milis
-            milisAtuais = System.currentTimeMillis();
-        }
-    }
-    
     public void salvar(){
         try {
-            metodoLento();
             getLogic().salvar(entity);
             addMensagem("Salvo com sucesso!");
             pesquisar();
         } catch (Exception ex) {
             addMensagemErro(ex.getMessage());
+            
         }
     }
     
@@ -85,6 +76,7 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
             }
         } catch (Exception ex) {
             addMensagemErro(ex.getMessage());
+            ex.printStackTrace();
         }
     }
     

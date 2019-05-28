@@ -22,7 +22,7 @@ public class Produto implements Serializable{
     private String marca;
     @Column(name = "codigo_barras")
     private String codigoBarras;
-    @Column(name = "unidade_medida")
+    @Column(name = "unidade")
     private String unidadeMedida;
     @ManyToOne
     @JoinColumn(name = "categoria_id")

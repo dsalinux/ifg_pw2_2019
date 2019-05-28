@@ -10,6 +10,8 @@
         <h:outputStylesheet library="css" name="reset.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="ajustes.css"></h:outputStylesheet>
         <h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+        <!--Spinkit retirado de: https://tobiasahlin.com/spinkit/-->
+        <h:outputStylesheet library="css" name="spinkit.css"></h:outputStylesheet>
     </h:head>
     <h:body class="sidebar-active">
         <header>
@@ -27,7 +29,7 @@
                 </div>
             </div>
         </header>
-        
+
         <nav class="sidebar sidebar-mob">
             <div class="usuario">
                 <div class="foto">
@@ -39,7 +41,7 @@
             </div>
             <a href="index.xhtml" class="sidebar-item #{view.viewId.endsWith('index.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-dashboard"></i>Dashboard
-                
+
             </a>
             <a href="gerenciar-produto.xhtml" class="sidebar-item #{view.viewId.endsWith('gerenciar-produto.xhtml')?'active':''}">
                 <i class="fa fa-fw fa-cubes"></i>Gerenciar Produto
@@ -51,17 +53,42 @@
                 <i class="fa fa-fw fa-users"></i>Gerenciar Usuarios
             </a>
         </nav>
-        
+
         <main>
+            <!-- Mensagem em linha em baixo da toolbar -->
+            <p:messages autoUpdate="true" showDetail="true"></p:messages>
+
+            <!-- Mensagem flutuante no canto superior direito -->
+            <p:growl autoUpdate="true" showDetail="true"></p:growl>
             <ui:insert></ui:insert>
         </main>
-        
+
         <footer>
             <div class="copyright">
                 Sicom - Sistema Comercial do TADS©
             </div>
         </footer>
-        
+
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+        <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+            <div class="sk-fading-circle">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+            </div>
+            <div class="texto-processando">Processando...</div>
+        </p:dialog>
+
         <!-- Componentes Extras -->
         <h:form>
             <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
@@ -69,7 +96,7 @@
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-undo" />
             </p:confirmDialog> 
         </h:form>
-        
+
         <h:outputScript library="primefaces" name="jquery/jquery.js"></h:outputScript>
         <h:outputScript library="js" name="geral.js"></h:outputScript>
     </h:body>
