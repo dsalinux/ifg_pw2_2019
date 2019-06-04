@@ -88,13 +88,22 @@ nav.sidebar, main, footer {
 }
 nav.sidebar { 
     width: 250px;
-    height: 100%;
+    height: calc(100vh);
     top: 50px;
     transition: left 0.5s;
     position: fixed;
     overflow: auto;
     background-color: #142837;
     z-index: 10;
+}
+nav.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+nav.sidebar::-webkit-scrollbar-thumb {
+  background: #6a91a4; 
+}
+nav.sidebar > ul {
+    padding-bottom: 80px;
 }
 nav.sidebar .fa {
     margin-right: 8px;
