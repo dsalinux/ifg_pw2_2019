@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom-comp"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+    <h:form>
+        <p:fieldset legend="Dashboard">
+            <si:toolbar-crud crudBean="#{permissaoBean}"/>
+
+            <p:panelGrid columns="2" styleClass="ui-noborder" 
+                         rendered="#{permissaoBean.statusTela != 'PESQUISANDO'}">
+
+                <p:outputLabel value="Nome"></p:outputLabel>
+                <p:inputText value="#{permissaoBean.entity.nome}"  onkeyup="value=value.toUpperCase().replace(' ','_')"></p:inputText>
+                <p:outputLabel value="Descrição"></p:outputLabel>
+                <p:inputText value="#{permissaoBean.entity.descricao}"></p:inputText>
+
+            </p:panelGrid>
+
+            <p:dataTable value="#{permissaoBean.entitys}" var="enity"
+                         rendered="#{permissaoBean.statusTela == 'PESQUISANDO'}">
+                
+                <p:column width="100">
+                    <si:colunaAcoes crudBean="#{permissaoBean}" entity="#{enity}"/>
+                </p:column>
+                
+                <p:column headerText="Nome">
+                    <h:outputText value="#{enity.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{enity.descricao}"></h:outputText>
+                </p:column>
+            </p:dataTable>
+            
+        </p:fieldset>
+    </h:form>
+</ui:composition>
+

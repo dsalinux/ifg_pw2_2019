@@ -4,7 +4,7 @@ import br.edu.ifg.sistemacomercial.entity.Usuario;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UsuarioDAO extends GenericDAO<Usuario>{
+public class UsuarioDAO extends GenericDAO<Usuario, Integer>{
 
 //    @Override
 //    public List<Usuario> listar() throws SQLException {

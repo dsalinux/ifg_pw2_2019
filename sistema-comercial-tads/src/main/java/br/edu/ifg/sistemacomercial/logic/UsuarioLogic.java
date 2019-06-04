@@ -1,10 +1,13 @@
 package br.edu.ifg.sistemacomercial.logic;
 
 import br.edu.ifg.sistemacomercial.dao.UsuarioDAO;
+import br.edu.ifg.sistemacomercial.entity.Permissao;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.hibernate.Hibernate;
 
 public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
 
@@ -30,7 +33,9 @@ public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
 
     @Override
     public Usuario buscarPorId(Integer id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Usuario usuario = dao.buscarPorId(id);
+        usuario.getPermissoes().size();
+        return usuario;
     }
 
     @Override

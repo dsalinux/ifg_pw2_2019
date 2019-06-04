@@ -72,7 +72,7 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
             }
             entitys = getLogic().buscar(null);// <-----trocar de entityDAO.listar()
             if(entitys == null || entitys.isEmpty()){
-                addMensagemAviso("Nenhum usuário cadastrado.");
+                addMensagemAviso("Nenhum registro cadastrado.");
             }
         } catch (Exception ex) {
             addMensagemErro(ex.getMessage());

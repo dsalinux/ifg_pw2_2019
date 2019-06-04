@@ -5,15 +5,26 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 template="template.xhtml"
-                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom-comp">
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom-comp"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
     <ui:param name="tituloPagina" value="Gerenciar Usuários"></ui:param>
     <h:form>
         <p:fieldset legend="Dashboard">
-            <si:toolbar-crud crudBean="#{usuarioBean}"/>
 
+            <si:toolbar-crud crudBean="#{usuarioBean}">
+                <f:facet name="opcoes">
+                    <p:commandButton value="#{usuarioBean.entity.dataDesativacao == null?'Desativar':'Ativar'}"
+                                     update="@form" rendered="#{usuarioBean.statusTela == 'EDITANDO'}"
+                                     actionListener="#{usuarioBean.ativarDesativar(usuarioBean.entity)}"
+                                     style="color: #{usuarioBean.entity.dataDesativacao == null?'green':'red'}"
+                                     icon="fa #{usuarioBean.entity.dataDesativacao == null?'fa-check-circle-o':'fa-close'}"
+                                     ></p:commandButton>
+                </f:facet>
+
+            </si:toolbar-crud>
             <p:panelGrid columns="2" styleClass="ui-noborder" 
-                         rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
+                         rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}" layout="grid" columnClasses="colunaLabel, colunaInput">
 
                 <p:outputLabel value="Nome"></p:outputLabel>
                 <p:inputText value="#{usuarioBean.entity.nome}"></p:inputText>
@@ -22,11 +33,28 @@
                 <p:outputLabel value="Senha"></p:outputLabel>
                 <p:password value="#{usuarioBean.senha}"></p:password>
 
-
             </p:panelGrid>
+            <p:spacer height="20px"></p:spacer>
+            <p:fieldset legend="Selecione">
+                <p:selectManyButton value="#{usuarioBean.entity.permissoes}"  class="p-grid" converter="permissaoConverter">
+                <!-- collectionType="" - Também funciona, porém o Netbeans não reconhece o atributo -->
+                    <f:selectItems value="#{usuarioBean.permissoes}" var="entity" itemLabel="#{entity.nome}" itemValue="#{entity}" />
+                    <f:attribute name="collectionType" value="java.util.ArrayList"/>
+                </p:selectManyButton>
+            </p:fieldset>
 
             <p:dataTable value="#{usuarioBean.entitys}" var="user"
                          rendered="#{usuarioBean.statusTela == 'PESQUISANDO'}">
+
+                <p:column width="135">
+                    <si:colunaAcoes crudBean="#{usuarioBean}" entity="#{user}" rederedDelete="true">
+                        <p:commandButton icon="fa #{user.dataDesativacao == null?'fa-check-circle-o':'fa-close'}" update="@form"
+                                         actionListener="#{usuarioBean.ativarDesativar(user)}"
+                                         style="color: #{user.dataDesativacao == null?'green':'red'}">
+                            <p:tooltip for="@parent" value="#{user.dataDesativacao == null?'Desativar':'Ativar'}"></p:tooltip>
+                        </p:commandButton>
+                    </si:colunaAcoes>
+                </p:column>
 
                 <p:column width="32">
                     <img class="table-image" src="https://www.gravatar.com/avatar/#{user.emailHash}?s=32&amp;d=mp"></img>
@@ -39,17 +67,6 @@
                 </p:column>
                 <p:column headerText="Permissoes">
                     <h:outputText value="#{user.permissoesString}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Delete" update="@form"
-                                     actionListener="#{usuarioBean.remover(user)}">
-                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
-                    </p:commandButton>
-
-                    <p:commandButton value="Editar" update="@form"
-                                     actionListener="#{usuarioBean.editar(user)}"></p:commandButton>
-                    <p:commandButton value="#{user.dataDesativacao == null?'Desativar':'Ativar'}" update="@form"
-                                     actionListener="#{usuarioBean.ativarDesativar(user)}"></p:commandButton>
                 </p:column>
             </p:dataTable>
         </p:fieldset>

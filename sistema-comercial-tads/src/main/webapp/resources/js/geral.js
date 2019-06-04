@@ -7,3 +7,9 @@ $(".menu-button-toggle").click(function(menuButton){
         menuButton.preventDefault();
     }
 });
+
+$(".submenu-toogle").click(function(event){
+    event.preventDefault();
+    submenuTarget = $(this).attr("submenu_target");
+    $("#"+submenuTarget).toggleClass("open");
+});

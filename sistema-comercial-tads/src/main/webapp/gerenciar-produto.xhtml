@@ -9,7 +9,7 @@
                 xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom-comp">
 
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
-    
+
     <h:form>
         <p:fieldset legend="Dashboard">
             <si:toolbar-crud crudBean="#{produtoBean}"/>
@@ -37,8 +37,8 @@
             <p:dataTable value="#{produtoBean.entitys}" var="produto"
                          rendered="#{produtoBean.statusTela == 'PESQUISANDO'}">
 
-                <p:column headerText="ID">
-                    <h:outputText value="#{produto.id}"></h:outputText>
+                <p:column width="100">
+                    <si:colunaAcoes crudBean="#{produtoBean}" entity="#{produto}"></si:colunaAcoes>
                 </p:column>                    
                 <p:column headerText="Nome">
                     <h:outputText value="#{produto.nome}"></h:outputText>
@@ -54,15 +54,6 @@
                 </p:column>
                 <p:column headerText="Categoria">
                     <h:outputText value="#{produto.categoria.nome}"></h:outputText>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Delete" update="@form"
-                                     actionListener="#{produtoBean.remover(produto)}">
-                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
-                    </p:commandButton>
-
-                    <p:commandButton value="Editar" update="@form"
-                                     actionListener="#{produtoBean.editar(produto)}"></p:commandButton>
                 </p:column>
             </p:dataTable>
         </p:fieldset>

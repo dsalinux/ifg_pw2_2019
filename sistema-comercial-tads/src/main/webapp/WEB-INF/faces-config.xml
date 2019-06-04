@@ -11,5 +11,14 @@
         <resource-env-ref-name>BeanManager</resource-env-ref-name>
         <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
     </resource-env-ref>
-    
+    <application>
+        <resource-bundle>
+            <base-name>br.edu.ifg.sistemacomercial.properties.messages</base-name>
+            <var>messages</var>
+        </resource-bundle>
+        <locale-config>
+           <default-locale>pt_BR</default-locale>
+           <supported-locale>pt_BR</supported-locale>
+        </locale-config>
+    </application>
 </faces-config>

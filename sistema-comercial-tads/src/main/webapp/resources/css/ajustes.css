@@ -1,3 +1,50 @@
 .table-image {
     position: absolute;
 }
+.fa {
+    width: 1em !important;
+    font-size: 16px!important;
+    margin-top: -8px!important;
+}
+
+/*Formata colunas do PanelGrid*/
+.colunaLabel {
+    text-align: right;
+}
+@media(max-width: 700px) {
+    .colunaLabel {
+        text-align: left;
+    }
+}
+@media(min-width: 701px) {
+    .colunaLabel {
+        width: 30%
+    }
+    .colunaInput {
+        width: 70%
+    }
+}
+@media(min-width: 900px) {
+    .colunaLabel {
+        width: 20%
+    }
+    .colunaInput {
+        width: 80%
+    }
+}
+@media(min-width: 1200px) {
+    .colunaLabel {
+        width: 15%
+    }
+    .colunaInput {
+        width: 85%
+    }
+}
+@media(min-width: 1400px) {
+    .colunaLabel {
+        width: 10%
+    }
+    .colunaInput {
+        width: 90%
+    }
+}

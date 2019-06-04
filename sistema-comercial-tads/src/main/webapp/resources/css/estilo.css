@@ -39,6 +39,9 @@ header .logo {
     padding: 0 15px;
     display: block;
 }
+.menu-button-toggle .fa {
+    font-size: 1em!important;
+}
 .menu-button-toggle:hover {
     background-color: rgba(255,255,255,0.1);
 }
@@ -93,13 +96,38 @@ nav.sidebar {
     background-color: #142837;
     z-index: 10;
 }
-nav.sidebar a.sidebar-item{
+nav.sidebar .fa {
+    margin-right: 8px;
+}
+nav.sidebar ul li a.sidebar-item{
     display: block;
     padding: 20px 0px 20px 10px;
     text-decoration: none;
     color: #eee;
-/*    color: #333;*/
+    /*    color: #333;*/
 }
+
+/*Constroi o submenu*/
+nav.sidebar ul li ul.submenu {
+    height: 0;
+    overflow: hidden;
+    transform: scaleY(0);    
+    transform-origin: top;
+    background: rgba(255,255,255,0.1);
+
+}
+nav.sidebar ul li ul.submenu.open {
+    height: auto;
+    transform: scaleY(1);    
+    transition: transform cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s;
+    background: rgba(255,255,255,0.1);
+}
+nav.sidebar ul li ul.submenu.open {
+    background: rgba(255,255,255,0.1);
+}
+/*nav.sidebar ul li ul.submenu li a{
+    padding-left: 20px;
+}*/
 nav.sidebar a.sidebar-item.active{
     border-left: 8px solid #22506B;
 }

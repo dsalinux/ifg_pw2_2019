@@ -8,7 +8,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-public class GenericDAO<E> implements Serializable {
+public class GenericDAO<E, ID extends Serializable> implements Serializable {
     
     @Inject
     private EntityManager entityManager;
@@ -29,6 +29,11 @@ public class GenericDAO<E> implements Serializable {
     public List<E> listar() throws SQLException{
         return entityManager.createQuery("from "+getEntityClass().getName()).getResultList();
     }
+    
+    public E buscarPorId(ID id){
+        return entityManager.find(getEntityClass(), id);
+    }
+    
     public Class<E> getEntityClass() {
         Type type = getClass().getGenericSuperclass();
         ParameterizedType paramType = (ParameterizedType) type;

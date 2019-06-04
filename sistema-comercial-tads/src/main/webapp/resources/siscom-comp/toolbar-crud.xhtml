@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:cc="http://xmlns.jcp.org/jsf/composite"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <!-- INTERFACE -->
     <cc:interface>
@@ -15,17 +16,30 @@
     <cc:implementation>
         <p:toolbar id="toolbaraction">
             <p:toolbarGroup>
+                
+                <p:commandButton value="#{cc.attrs.crudBean.statusTela != 'PESQUISANDO'?'Voltar':'Pesquisar'}" 
+                                 actionListener="#{cc.attrs.crudBean.pesquisar()}"
+                                 update="@form"
+                                 icon="fa #{cc.attrs.crudBean.statusTela != 'PESQUISANDO'?'fa-reply':'fa-search'}"
+                                 ></p:commandButton>
+                
+                <p:separator></p:separator>
+                
                 <p:commandButton value="Novo" actionListener="#{cc.attrs.crudBean.novo()}"
-                                 update="@form"></p:commandButton>
-
-                <p:commandButton value="Pesquisar" actionListener="#{cc.attrs.crudBean.pesquisar()}"
-                                 update="@form"></p:commandButton>
-
+                                 update="@form" icon="fa fa-file-o"
+                                 ></p:commandButton>
+                
                 <p:commandButton value="Salvar" actionListener="#{cc.attrs.crudBean.salvar()}"
-                                 update="@form" 
+                                 update="@form" icon="fa fa-save"
                                  rendered="#{cc.attrs.crudBean.statusTela != 'PESQUISANDO'}"></p:commandButton>
-
+                
+                <cc:insertChildren></cc:insertChildren>
             </p:toolbarGroup>
+            
+            <p:toolbarGroup align="right">
+                <cc:renderFacet name="opcoes"></cc:renderFacet>
+            </p:toolbarGroup>
+            
         </p:toolbar>
     </cc:implementation>
 </html>
