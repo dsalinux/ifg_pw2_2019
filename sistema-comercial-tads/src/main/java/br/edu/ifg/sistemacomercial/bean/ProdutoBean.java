@@ -1,19 +1,12 @@
 package br.edu.ifg.sistemacomercial.bean;
 
-import br.edu.ifg.sistemacomercial.dao.CategoriaDAO;
-import br.edu.ifg.sistemacomercial.dao.ProdutoDAO;
 import br.edu.ifg.sistemacomercial.entity.Categoria;
 import br.edu.ifg.sistemacomercial.entity.Produto;
 import br.edu.ifg.sistemacomercial.logic.CategoriaLogic;
-import br.edu.ifg.sistemacomercial.logic.GenericLogic;
 import br.edu.ifg.sistemacomercial.logic.ProdutoLogic;
-import br.edu.ifg.sistemacomercial.util.JsfUtil;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import br.edu.ifg.sistemacomercial.util.exception.NegocioException;
+import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,10 +23,12 @@ public class ProdutoBean extends GenericCrud<Produto, ProdutoLogic>{
     public List<Categoria> getCategorias(){
         try {
             return categoriaLogic.buscar(null);
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
-            return null;
+        } catch (SistemaException ex) {
+            addMensagemFatal(ex);
+        } catch (NegocioException ex) {
+            addMensagemErro(ex);
         }
+        return null;
     }
 
     @Override

@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "produto")
@@ -27,7 +28,7 @@ public class Produto implements Serializable{
     @ManyToOne
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
-
+    
     public Integer getId() {
         return id;
     }

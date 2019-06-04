@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class PedidoHasProduto implements Serializable {
@@ -14,6 +16,13 @@ public class PedidoHasProduto implements Serializable {
     private Double valor;
     private Double quantidade;
 
+    @ManyToOne
+    @JoinColumn(updatable = false, insertable = false, name = "produto_id")
+    private Produto produto;
+    @ManyToOne
+    @JoinColumn(updatable = false, insertable = false, name = "pedido_id")
+    private Pedido pedido;
+    
     public PedidoHasProdutoPk getId() {
         return id;
     }
@@ -36,6 +45,22 @@ public class PedidoHasProduto implements Serializable {
 
     public void setQuantidade(Double quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     @Override

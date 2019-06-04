@@ -1,13 +1,12 @@
 package br.edu.ifg.sistemacomercial.logic;
 
 import br.edu.ifg.sistemacomercial.dao.UsuarioDAO;
-import br.edu.ifg.sistemacomercial.entity.Permissao;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
-import java.util.ArrayList;
+import br.edu.ifg.sistemacomercial.util.exception.NegocioException;
+import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import org.hibernate.Hibernate;
 
 public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
 
@@ -15,9 +14,9 @@ public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
     private UsuarioDAO dao;
     
     @Override
-    public Usuario salvar(Usuario entity) throws Exception {
+    public Usuario salvar(Usuario entity) throws  NegocioException, SistemaException {
         if("".equals(entity.getNome().trim())){
-            throw new Exception("Nome do usuário é obrigatório.");
+            throw new NegocioException("Nome do usuário é obrigatório.");
         }
         if(entity.getDataCadastro() == null){
             entity.setDataCadastro(new Date());
@@ -27,19 +26,19 @@ public class UsuarioLogic implements GenericLogic<Usuario, Integer> {
     }
 
     @Override
-    public void deletar(Usuario entity) throws Exception {
+    public void deletar(Usuario entity) throws  NegocioException, SistemaException {
         dao.deletar(entity);
     }
 
     @Override
-    public Usuario buscarPorId(Integer id) throws Exception {
+    public Usuario buscarPorId(Integer id) throws  NegocioException, SistemaException {
         Usuario usuario = dao.buscarPorId(id);
         usuario.getPermissoes().size();
         return usuario;
     }
 
     @Override
-    public List<Usuario> buscar(Usuario entity) throws Exception {
+    public List<Usuario> buscar(Usuario entity) throws  NegocioException, SistemaException {
         List<Usuario> usuarios = dao.listar();
         return usuarios;
     }

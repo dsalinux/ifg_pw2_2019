@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="../template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+    <ui:param name="tituloPagina" value="404 - Não Encontrado"></ui:param>
+
+    <style>
+        .erro404 {
+            position: relative;
+            top: 50%;
+        }
+        .notfound {
+            font-size: 20vh!important;
+            text-align: center;
+            color: #142837;
+        }
+        .notfound i {
+            font-size: 15vh!important;
+            text-align: center;
+            color: #142837;
+        }
+
+        .aviso {
+            font-size: 2vh!important;
+            text-align: center;
+            color: #142837;
+        }
+    </style>
+    <div class="erro404">
+        <div class="notfound">
+            <i class=" fa fa-search"></i>
+        </div>
+        <div class="notfound">404</div>
+        <div class="aviso">Opa, perdão. A página que você tentou acessar não foi encontrada.</div>
+    </div>
+
+</ui:composition>
+

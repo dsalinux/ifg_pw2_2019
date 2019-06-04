@@ -2,12 +2,12 @@ package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.logic.GenericLogic;
 import br.edu.ifg.sistemacomercial.util.JsfUtil;
+import br.edu.ifg.sistemacomercial.util.exception.NegocioException;
+import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 
 public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUtil {
@@ -33,8 +33,8 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
         try {
             entity = getEntityClass().newInstance();
             statusTela = Status.INSERINDO;
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
+        } catch (IllegalAccessException | InstantiationException ex) {
+            addMensagemFatal(new SistemaException("Erro ao instanciar uma nova Classe "+getEntityClass().getName(), ex));
         }
         
     }
@@ -44,9 +44,10 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
             getLogic().salvar(entity);
             addMensagem("Salvo com sucesso!");
             pesquisar();
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
-            
+        } catch (NegocioException ex) {
+            addMensagemErro(ex);
+        } catch(SistemaException ex){
+            addMensagemFatal(ex);
         }
     }
     
@@ -55,8 +56,10 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
             getLogic().deletar(entity);
             entitys.remove(entity);
             addMensagem("Deletado com sucesso!");
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
+        } catch (NegocioException ex) {
+            addMensagemErro(ex);
+        } catch(SistemaException ex){
+            addMensagemFatal(ex);
         }
     }
     public void editar(E entity){
@@ -74,9 +77,10 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
             if(entitys == null || entitys.isEmpty()){
                 addMensagemAviso("Nenhum registro cadastrado.");
             }
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
-            ex.printStackTrace();
+        } catch (NegocioException ex) {
+            addMensagemErro(ex);
+        } catch(SistemaException ex){
+            addMensagemFatal(ex);
         }
     }
     
