@@ -35,7 +35,7 @@
 
             </p:panelGrid>
             <p:spacer height="20px"></p:spacer>
-            <p:fieldset legend="Selecione">
+            <p:fieldset legend="Selecione" rendered="#{usuarioBean.statusTela != 'PESQUISANDO'}">
                 <p:selectManyButton value="#{usuarioBean.entity.permissoes}"  class="p-grid" converter="permissaoConverter">
                 <!-- collectionType="" - Também funciona, porém o Netbeans não reconhece o atributo -->
                     <f:selectItems value="#{usuarioBean.permissoes}" var="entity" itemLabel="#{entity.nome}" itemValue="#{entity}" />

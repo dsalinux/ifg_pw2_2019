@@ -119,7 +119,7 @@ nav.sidebar ul li ul.submenu {
 nav.sidebar ul li ul.submenu.open {
     height: auto;
     transform: scaleY(1);    
-    transition: transform cubic-bezier(0.68, -0.55, 0.27, 1.55) 0.2s;
+    transition: ease-in-out 0.2s;
     background: rgba(255,255,255,0.1);
 }
 nav.sidebar ul li ul.submenu.open {
