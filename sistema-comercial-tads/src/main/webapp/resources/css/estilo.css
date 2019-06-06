@@ -97,10 +97,10 @@ nav.sidebar {
     z-index: 10;
 }
 nav.sidebar::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 nav.sidebar::-webkit-scrollbar-thumb {
-  background: #6a91a4; 
+    background: #6a91a4; 
 }
 nav.sidebar > ul {
     padding-bottom: 80px;
@@ -206,4 +206,44 @@ nav.sidebar .usuario  .foto > img{
 nav.sidebar .usuario .nome {
     text-align: center;
     padding: 10px 0 20px 0;
+}
+
+/*Cards Dashboard*/
+.card {
+    padding: 10px;
+    height: 100px;
+    border-radius: 6px;
+    box-shadow: 1px 1px 2px black;
+    border-bottom: 10px solid rgba(0,0,0,0.2);
+}
+.card-title {
+    font-size: 1.5em;
+    padding-left: 10px;
+}
+.card-content {
+    /*line-height: 2em;*/
+    font-size: 2em;
+    padding: 10px 0 0 10px;
+}
+i.card-icon {
+    float: right;
+    font-size: 3em;
+}
+.c1 {
+    background: #39B366;
+    color: white;
+}
+.c2 {
+    background: #673E9B;
+    color: white;
+}
+.c3 {
+    background: #F78F4E;
+    color: white;
+}
+.receita {
+    color: #46C83F;
+}
+.despesa {
+    color: #EB4A60;
 }

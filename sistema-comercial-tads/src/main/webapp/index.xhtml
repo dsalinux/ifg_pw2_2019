@@ -9,8 +9,45 @@
 
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
 
-    <h1>Bem vindo ao Sistema Comercial.</h1>
-   
+    <p:fieldset legend="Dasboard">
+
+        <div class="ui-grid">
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="card c1">
+                    <i class="card-icon fa fa-usd"></i>
+                    <div class="card-title">
+                        Vendas
+                    </div>
+                    <div class="card-content">
+                        25 vendas
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="card c2">
+                    <i class="card-icon fa fa-line-chart"></i>
+                    <div class="card-title">
+                        Resumo do mês
+                    </div>
+                    <div class="card-content">
+                        <div class="despesa">R$ 9.000,00 <i class="fa fa-caret-down"></i></div>
+                        <div class="receita">R$ 13.000,00 <i class="fa fa-caret-up"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <div class="card c3">
+                    <i class="card-icon fa fa-battery-quarter"></i>
+                    <div class="card-title">
+                        Estoque baixo
+                    </div>
+                    <div class="card-content">
+                        13 itens estoque mínimo
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p:fieldset>
 
 </ui:composition>
 
