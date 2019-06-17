@@ -18,12 +18,12 @@ public class PersistenceFactory {
                 .createEntityManager();
 
         
-        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/siscom", "postgres","Omniscellula").load();
+//        Flyway flyway = Flyway.configure().dataSource("jdbc:postgresql://localhost:5432/siscom", "postgres","Omniscellula").load();
 //        Flyway flyway = Flyway.configure().dataSource(
 //                entityManager.getEntityManagerFactory().getProperties().get("javax.persistence.jdbc.url").toString(), 
 //                entityManager.getEntityManagerFactory().getProperties().get("javax.persistence.jdbc.user").toString(),
 //                entityManager.getEntityManagerFactory().getProperties().get("javax.persistence.jdbc.password").toString()).load();
-        flyway.migrate();
+//        flyway.migrate();
         return entityManager;
     }
     
