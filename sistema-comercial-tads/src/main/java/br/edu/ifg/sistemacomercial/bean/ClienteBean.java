@@ -1,6 +1,7 @@
 package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.entity.Cliente;
+import br.edu.ifg.sistemacomercial.entity.enums.EstadosEnum;
 import br.edu.ifg.sistemacomercial.logic.ClienteLogic;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -19,15 +20,9 @@ public class ClienteBean extends GenericCrud<Cliente, ClienteLogic>{
         return logic;
     }
     
-    public List<Cliente> getClientes(){
-        try {
-            return getLogic().buscar(null);
-        } catch (Exception ex) {
-            addMensagemErro(ex.getMessage());
-            return null;
-        }
+    public EstadosEnum[] getListaEstados(){
+        return EstadosEnum.values();
     }
-    
     
     
 }

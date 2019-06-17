@@ -39,13 +39,48 @@
                 <p:inputText value="#{clienteBean.entity.email}"></p:inputText>
                 <p:outputLabel value="Observação"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.observacao}"></p:inputText>
-                <p:outputLabel value="Endereço"></p:outputLabel>
-                <p:selectOneMenu value="#{clienteBean.entity.enderecos}">
-                    <f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
-                    <f:selectItems value="#{clienteBean.clientes}" var="cat" 
-                                   itemLabel="#{cat.nome}" itemValue="#{cat}"></f:selectItems>
-                </p:selectOneMenu>
+                <h:outputText></h:outputText>
+                <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').show(); return;" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}"></p:button>
             </p:panelGrid>
+            <p:dialog header="Informações de Endereço" widgetVar="dialogEndereco" modal="true">
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Logradouro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Número"></h:outputLabel>
+                    <p:inputNumber></p:inputNumber>
+                    <h:outputLabel value="Complemento"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Bairro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Cep"></h:outputLabel>
+                    <p:inputMask mask="99.999-999"></p:inputMask>
+                    <h:outputLabel value="Estado"></h:outputLabel>
+                    <p:selectOneMenu >
+                        <f:selectItem itemValue="Selecione"></f:selectItem>
+                        <f:selectItems value="#{clienteBean.listaEstados}" var="uf" itemValue="#{uf.toString()}" itemLabel="#{uf.nome}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="Logradouro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').hide(); return;"></p:button>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dataTable value="#{clienteBean.entity.enderecos}" var="end" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
+                <p:column>
+                    <p:commandButton icon="fa fa-trash" update="@form"
+                                     actionListener="#{clienteBean.removeEndereco(end)}">
+                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
+                        <p:tooltip for="@parent" value="Deletar"></p:tooltip>
+                    </p:commandButton>
+
+                    <p:commandButton icon="fa fa-edit" update="@form" 
+                                     actionListener="#{clienteBean.ediarEndereco(end)}">
+                        <p:tooltip for="@parent" value="Editar"></p:tooltip>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Endereço">
+
+                </p:column>
+            </p:dataTable>
 
             <p:dataTable value="#{clienteBean.entitys}" var="cliente"
                          rendered="#{clienteBean.statusTela == 'PESQUISANDO'}">
@@ -82,9 +117,6 @@
                 </p:column>
                 <p:column headerText="E-mail">
                     <h:outputText value="#{cliente.email}"></h:outputText>
-                </p:column>
-                <p:column headerText="Endereço">
-                    <h:outputText value="#{cliente.endereco.nome}"></h:outputText>
                 </p:column>
                 <p:column headerText="Observação">
                     <h:outputText value="#{cliente.observacao}"></h:outputText>
