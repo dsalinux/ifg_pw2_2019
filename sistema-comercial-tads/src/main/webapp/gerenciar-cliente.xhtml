@@ -16,6 +16,7 @@
 
             <p:panelGrid columns="2" styleClass="ui-noborder" 
                          rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
+
                 <p:outputLabel value="Nome"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.nome}"></p:inputText>
                 <p:outputLabel value="Nome Fantasia"></p:outputLabel>
@@ -82,28 +83,22 @@
             </p:dataTable>
 
             <p:dataTable value="#{clienteBean.entitys}" var="cliente"
-                         rendered="#{clienteBean.statusTela == 'PESQUISANDO'}">
+                         rendered="#{clienteBean.statusTela == 'PESQUISANDO'}" reflow="true" rows="20" paginator="true">
 
                 <p:column width="90">
                     <si:colunaAcoes crudBean="#{clienteBean}" entity="#{cliente}"></si:colunaAcoes>
                 </p:column>                    
-                <p:column headerText="Nome">
-                    <h:outputText value="#{cliente.nome}"></h:outputText>
-                </p:column>
-                <p:column headerText="Nome Fantasia">
-                    <h:outputText value="#{cliente.apelidoFantasia}"></h:outputText>
+                <p:column headerText="Nome/Nome Fantasia">
+                    <h:outputText value="#{cliente.apelidoFantasia == ''?cliente.nome:cliente.apelidoFantasia}"></h:outputText>
                 </p:column>
                 <p:column headerText="CPF/CNPJ">
                     <h:outputText value="#{cliente.cpf == ''?cliente.cnpj:cliente.cpf}"></h:outputText>
-                </p:column>
-                <p:column headerText="IE">
-                    <h:outputText value="#{cliente.inscricao}"></h:outputText>
-                </p:column>
+                </p:column>               
                 <p:column headerText="Telefones">
                     <h:outputText value="#{cliente.telefone1} - #{cliente.telefone3}"></h:outputText>
                 </p:column>               
-                
-                <p:column headerText="E-mail">
+
+                <p:column headerText="E-mail" priority="5">
                     <h:outputText value="#{cliente.email}"></h:outputText>
                 </p:column>                
             </p:dataTable>
