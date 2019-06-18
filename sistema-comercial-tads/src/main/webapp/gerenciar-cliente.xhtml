@@ -16,25 +16,24 @@
 
             <p:panelGrid columns="2" styleClass="ui-noborder" 
                          rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
-
                 <p:outputLabel value="Nome"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.nome}"></p:inputText>
                 <p:outputLabel value="Nome Fantasia"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.apelidoFantasia}"></p:inputText>
                 <p:outputLabel value="CPF"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.cpf}" maxlength="11"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.cpf}" mask="999.999.999-99"></p:inputMask>
                 <p:outputLabel value="RG"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.rg}"></p:inputText>
                 <p:outputLabel value="CNPJ"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.cnpj}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.cnpj}" mask="99.999.999/9999-99"></p:inputMask>
                 <p:outputLabel value="IE"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.inscricao}"></p:inputText>
                 <p:outputLabel value="Telefone Principal"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone1}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone1}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="Telefone Secundário"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone2}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone2}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="Telefone Comercial"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone3}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone3}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="E-mail"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.email}"></p:inputText>
                 <p:outputLabel value="Observação"></p:outputLabel>
@@ -94,33 +93,19 @@
                 <p:column headerText="Nome Fantasia">
                     <h:outputText value="#{cliente.apelidoFantasia}"></h:outputText>
                 </p:column>
-                <p:column headerText="CPF">
-                    <h:outputText value="#{cliente.cpf}"></h:outputText>
-                </p:column>
-                <p:column headerText="RG">
-                    <h:outputText value="#{cliente.rg}"></h:outputText>
-                </p:column>
-                <p:column headerText="CNPJ">
-                    <h:outputText value="#{cliente.cnpj}"></h:outputText>
+                <p:column headerText="CPF/CNPJ">
+                    <h:outputText value="#{cliente.cpf == ''?cliente.cnpj:cliente.cpf}"></h:outputText>
                 </p:column>
                 <p:column headerText="IE">
                     <h:outputText value="#{cliente.inscricao}"></h:outputText>
                 </p:column>
-                <p:column headerText="Telefone Principal">
-                    <h:outputText value="#{cliente.telefone1}"></h:outputText>
-                </p:column>
-                <p:column headerText="Telefone Secundário">
-                    <h:outputText value="#{cliente.telefone2}"></h:outputText>
-                </p:column>
-                <p:column headerText="Telefone Comercial">
-                    <h:outputText value="#{cliente.telefone3}"></h:outputText>
-                </p:column>
+                <p:column headerText="Telefones">
+                    <h:outputText value="#{cliente.telefone1} - #{cliente.telefone3}"></h:outputText>
+                </p:column>               
+                
                 <p:column headerText="E-mail">
                     <h:outputText value="#{cliente.email}"></h:outputText>
-                </p:column>
-                <p:column headerText="Observação">
-                    <h:outputText value="#{cliente.observacao}"></h:outputText>
-                </p:column>
+                </p:column>                
             </p:dataTable>
         </p:fieldset>
 
