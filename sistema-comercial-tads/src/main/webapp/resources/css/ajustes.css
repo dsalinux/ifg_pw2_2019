@@ -6,7 +6,9 @@
     font-size: 16px!important;
     margin-top: -8px!important;
 }
-
+ .value {
+   font-weight: bold;
+ }
 /*Formata colunas do PanelGrid*/
 .colunaLabel {
     text-align: right;

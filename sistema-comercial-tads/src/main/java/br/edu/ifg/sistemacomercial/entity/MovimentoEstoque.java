@@ -1,19 +1,39 @@
 package br.edu.ifg.sistemacomercial.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "movimento_estoque")
 public class MovimentoEstoque implements Serializable{
+    
+    public enum TipoMovimento {
+
+        SAIDA("Saída"),
+        ENTRADA("Entrada");
+
+        private String nome;
+        
+        private TipoMovimento(String nome) {
+            this.nome = nome;
+        }
+        public String getNome() {
+            return nome;
+        }
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +47,16 @@ public class MovimentoEstoque implements Serializable{
     @JoinColumn(name = "fornecedor_id")
     private Fornecedor fornecedor;
 
-    @Column(name = "tipo_movimento")    
-    private String tipoMovimento;
+    @Column(name = "tipo_movimento")
+    @Enumerated(EnumType.STRING)
+    private TipoMovimento tipoMovimento;
 
-    @Column(name = "quantidade_recebida")
+    @Column(name = "quantidade")
     private Double quantidadeRecebida;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_movimento")
+    private Date dataMovimento;
 
     @Column(name = "preco_custo")
     private Double precoCusto;
@@ -62,11 +87,11 @@ public class MovimentoEstoque implements Serializable{
         this.fornecedor = fornecedor;
     }
 
-    public String getTipo_movimento() {
+    public TipoMovimento getTipoMovimento() {
         return tipoMovimento;
     }
 
-    public void setTipoMovimento(String tipoMovimento) {
+    public void setTipoMovimento(TipoMovimento tipoMovimento) {
         this.tipoMovimento = tipoMovimento;
     }
 
@@ -86,14 +111,22 @@ public class MovimentoEstoque implements Serializable{
         this.quantidadeRecebida = quantidadeRecebida;
     }
 
-    public Double getPreco_custo() {
+    public Double getPrecoCusto() {
         return precoCusto;
     }
 
-    public void setPreco_custo(Double precoCusto) {
+    public void setPrecoCusto(Double precoCusto) {
         this.precoCusto = precoCusto;
     }
 
+    public Date getDataMovimento() {
+        return dataMovimento;
+    }
+
+    public void setDataMovimento(Date dataMovimento) {
+        this.dataMovimento = dataMovimento;
+    }
+        
     @Override
     public int hashCode() {
         int hash = 5;

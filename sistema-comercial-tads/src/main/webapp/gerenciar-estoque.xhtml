@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom">
+
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+
+    <h:form>
+        <p:fieldset legend="Dashboard">
+            <si:toolbar-crud crudBean="#{movimentoEstoqueBean}"/>
+
+            <p:panelGrid columns="2" styleClass="ui-noborder" 
+                         rendered="#{movimentoEstoqueBean.statusTela != 'PESQUISANDO'}">
+                
+                <p:outputLabel value="Produto:"></p:outputLabel>
+                <p:selectOneMenu value="#{movimentoEstoqueBean.entity.produto}">
+                    <f:selectItem itemLabel="Selecione o Produto" itemValue=""></f:selectItem>
+                    <f:selectItems value="#{movimentoEstoqueBean.produtos}" var="pro" 
+                                   itemLabel="#{pro.nome}" itemValue="#{pro}"></f:selectItems> 
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Fornecedor:"></p:outputLabel>
+                <p:selectOneMenu value="#{movimentoEstoqueBean.entity.fornecedor}">
+                    <f:selectItem itemLabel="Selecione o Fornecedor &#160;" itemValue=""></f:selectItem>
+                    <f:selectItems value="#{movimentoEstoqueBean.fornecedores}" var="cat" 
+                                   itemLabel="#{cat.nome}" itemValue="#{cat}"></f:selectItems>
+                </p:selectOneMenu>
+            
+                <p:outputLabel value="Tipo Movimento:"></p:outputLabel>
+                <p:selectOneRadio value="#{movimentoEstoqueBean.entity.tipoMovimento}">
+                    <f:selectItem itemValue="SAIDA" itemLabel="Saída"></f:selectItem>
+                    <f:selectItem itemValue="ENTRADA" itemLabel="Entrada"></f:selectItem>
+                </p:selectOneRadio>
+                
+                <p:outputLabel for="button" value="Data Movimento:" />
+                <p:calendar id="button" value="#{movimentoEstoqueBean.entity.dataMovimento}" showOn="button" />
+        
+                <p:outputLabel value="Quantidade:"></p:outputLabel>
+                <p:inputNumber  value="#{movimentoEstoqueBean.entity.quantidadeRecebida}">
+                </p:inputNumber>
+                
+                <p:outputLabel value="Preço de Custo:"></p:outputLabel>
+                <p:inputNumber symbol="R$" value="#{movimentoEstoqueBean.entity.precoCusto}">
+               
+                </p:inputNumber>
+                
+                  <p:outputLabel value="Observação:"></p:outputLabel>
+                  <p:inputText value="#{movimentoEstoqueBean.entity.observacao}"></p:inputText>
+               
+
+            </p:panelGrid>
+
+            <p:dataTable value="#{movimentoEstoqueBean.entitys}" var="movimentoEstoque"
+                         rendered="#{movimentoEstoqueBean.statusTela == 'PESQUISANDO'}">
+
+                <p:column width="100"> 
+                    <si:colunaAcoes crudBean="#{movimentoEstoqueBean}" entity="#{movimentoEstoque}"></si:colunaAcoes>
+                </p:column>      
+                 <p:column headerText="Produto">
+                    <h:outputText value="#{movimentoEstoque.produto.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Fornecedor">
+                    <h:outputText value="#{movimentoEstoque.fornecedor.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Tipo Movimento">
+                    <h:outputText value="#{movimentoEstoque.tipoMovimento.nome}"></h:outputText>
+                </p:column>
+                
+                <p:column headerText="Quantidade">
+                    <h:outputText value="#{movimentoEstoque.quantidadeRecebida}"></h:outputText>
+                </p:column>
+                <p:column headerText="Preço de Custo">
+                    <h:outputText value="#{movimentoEstoque.precoCusto}">
+                        <f:convertNumber type="currency"></f:convertNumber>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Data Movimento">
+                    <h:outputText value="#{movimentoEstoque.dataMovimento}">
+                        <f:convertDateTime></f:convertDateTime>
+                    </h:outputText>
+                </p:column>
+               
+            </p:dataTable>
+        </p:fieldset>
+
+    </h:form>
+
+</ui:composition>
+

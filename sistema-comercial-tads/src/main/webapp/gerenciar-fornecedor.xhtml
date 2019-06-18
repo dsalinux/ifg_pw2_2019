@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom">
+    
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+    <ui:param name="tituloPagina" value="Gerenciar Fornecedores"></ui:param>
+    <h:form>
+        <p:fieldset legend="Dashboard">
+
+            <si:toolbar-crud crudBean="#{fornecedorBean}"/>                
+
+           
+            <p:panelGrid columns="2" styleClass="ui-noborder" 
+                         rendered="#{fornecedorBean.statusTela != 'PESQUISANDO'}" layout="grid" columnClasses="colunaLabel, colunaInput">
+
+                <p:outputLabel value="Nome:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.nome}"></p:inputText>
+                
+                <p:outputLabel value="CNPJ:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.cnpj}"></p:inputText>
+                
+                <p:outputLabel value="CPF:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.cpf}"></p:inputText>
+                               
+                <p:outputLabel value="RG:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.rg}"></p:inputText>
+                
+                 <p:outputLabel value="Inscrição:"></p:outputLabel>
+                 <p:inputText value="#{fornecedorBean.entity.inscricao}"></p:inputText>                
+                
+                <p:outputLabel value="Telefone 01:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.telefone1}"></p:inputText>
+                
+                <p:outputLabel value="Telefone 02:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.telefone2}"></p:inputText>
+                
+                <p:outputLabel value="Email:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.email}"></p:inputText>
+                
+                <p:outputLabel value="Web-Site:"></p:outputLabel>
+                <p:inputText value="#{fornecedorBean.entity.website}"></p:inputText>
+
+            </p:panelGrid>
+            <p:spacer height="20px"></p:spacer>
+           
+            <p:dataTable value="#{fornecedorBean.entitys}" var="fornecedor"
+                         rendered="#{fornecedorBean.statusTela == 'PESQUISANDO'}">
+                
+                   <p:column width="100">
+                       <si:colunaAcoes crudBean="#{fornecedorBean}" entity="#{fornecedor}"></si:colunaAcoes>
+                </p:column> 
+                
+                <p:column headerText="Nome">
+                    <h:outputText value="#{fornecedor.nome}"></h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Email">
+                    <h:outputText value="#{fornecedor.email}"></h:outputText>
+                </p:column>
+                                      
+                 <p:column headerText="CNPJ">
+                    <h:outputText value="#{fornecedor.cnpj}"></h:outputText>
+                </p:column>
+                
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{fornecedor.telefone1}"></h:outputText>
+                </p:column>
+                                                 
+            </p:dataTable>
+        </p:fieldset>
+    </h:form>
+</ui:composition>
+
