@@ -90,6 +90,13 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
+        
+        <!-- Bibliotecas para relatorio -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.8.1</version>
+        </dependency>
     </dependencies>
 
     <build>
