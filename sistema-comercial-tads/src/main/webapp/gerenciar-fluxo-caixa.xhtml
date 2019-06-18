@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom">
+
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+
+    <h:form>
+        <p:fieldset legend="Dashboard">
+            <si:toolbar-crud crudBean="#{fluxoCaixaBean}"/>
+
+            <p:panelGrid columns="2" styleClass="ui-noborder" 
+                         rendered="#{fluxoCaixaBean.statusTela != 'PESQUISANDO'}">
+
+
+                <p:outputLabel value="Tipo Movimento"></p:outputLabel>
+                <h:selectOneRadio value="#{fluxoCaixaBean.entity.tipoMovimento}">
+                    <!--<f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>-->
+                    <f:selectItems value="#{fluxoCaixaBean.getTiposMovimento()}" var="t" 
+                                   itemLabel="#{t.nome}" itemValue="#{t}"></f:selectItems>
+                </h:selectOneRadio>
+
+
+                <p:outputLabel value="Descrição"></p:outputLabel>
+                <p:inputText value="#{fluxoCaixaBean.entity.descricao}"></p:inputText>
+
+
+                <p:outputLabel value="Valor"></p:outputLabel>
+                <p:inputNumber value="#{fluxoCaixaBean.entity.valor}">
+                </p:inputNumber>
+
+
+                <p:outputLabel for="button" value="Data do Movimento" />
+                <p:calendar id="button" value="#{fluxoCaixaBean.entity.dataMovimento}" showOn="button" />
+
+
+                <p:outputLabel value="Conta">
+                </p:outputLabel>
+                <p:selectOneMenu value="#{fluxoCaixaBean.entity.conta}">
+                    <f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
+                    <f:selectItems value="#{fluxoCaixaBean.contas}" var="cont" 
+                                   itemLabel="#{cont.nome}" itemValue="#{cont}"></f:selectItems>
+                </p:selectOneMenu>
+
+
+            </p:panelGrid>
+
+
+            <p:fieldset legend="Resumo" style="font-size: 1.1em" rendered="#{fluxoCaixaBean.statusTela == 'PESQUISANDO'}">
+
+                <p:panelGrid styleClass="ui-noborder" columns="4">
+                    <h:outputLabel value="Data: "></h:outputLabel>
+                    <p:calendar id="button1" value="#{fluxoCaixaBean.dataInicio}" showOn="button" />
+                    <h:outputLabel value="até"></h:outputLabel>
+                    <p:calendar id="button2" value="#{fluxoCaixaBean.dataFim}" showOn="button" />
+                </p:panelGrid>
+                <p:separator></p:separator>
+                <div>
+                    Total de entradas:
+                    <h:outputText style="color:green; font-weight: bold;" value="#{fluxoCaixaBean.totalEntrada}">
+                        <f:convertNumber type="currency"> </f:convertNumber>
+                    </h:outputText>
+                    <i style="color: red;" class="fa fa-arrow-up"></i>
+                </div>
+                <p:spacer height="5px"></p:spacer>
+
+                <div>
+                    Total de Saída:
+                    <h:outputText style="color:red; font-weight: bold;" value="#{fluxoCaixaBean.totalSaida}">
+                        <f:convertNumber type="currency"> </f:convertNumber>
+                    </h:outputText>
+                    <i style="color: red;" class="fa fa-arrow-up"></i>
+                </div>
+
+                <p:separator></p:separator>
+
+                <div style="font-size: 1.2em">
+                    Resumo:
+                    <h:outputText style="color:#{fluxoCaixaBean.resumo>0 ? 'blue': 'red'}; font-weight: bold;" value="#{fluxoCaixaBean.resumo}">
+                        <f:convertNumber type="currency">
+
+                        </f:convertNumber>
+                    </h:outputText>
+                </div>
+
+            </p:fieldset>
+            <p:dataTable value="#{fluxoCaixaBean.entitys}" var="fluxoCaixa"
+                         rendered="#{fluxoCaixaBean.statusTela == 'PESQUISANDO'}">
+
+                <p:column width="100">
+                    <si:colunaAcoes crudBean="#{fluxoCaixaBean}" entity="#{fluxoCaixa}"></si:colunaAcoes>
+                </p:column>  
+
+
+                <p:column headerText="Tipo do Movimento">
+                    <div style="color: #{fluxoCaixa.tipoMovimento=='SAÍDA' ? 'red':'green'}">
+                        <i class="fa #{fluxoCaixa.tipoMovimento=='SAÍDA'?'fa-arrow-up':'fa-arrow-down'}"></i>
+                        <h:outputText value="#{fluxoCaixa.tipoMovimento}"></h:outputText>
+                    </div>
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{fluxoCaixa.descricao}"></h:outputText>
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{fluxoCaixa.valor}">
+                        <f:convertNumber type="currency">
+                        </f:convertNumber>
+                    </h:outputText>
+
+                </p:column>
+                <p:column headerText="Data de Movimento">
+                    <h:outputText value="#{fluxoCaixa.dataMovimento}"> <f:convertDateTime></f:convertDateTime></h:outputText>
+
+                </p:column>
+                <p:column headerText="Conta">
+                    <h:outputText value="#{fluxoCaixa.conta.nome}"></h:outputText>
+                </p:column>
+
+
+            </p:dataTable>
+
+
+
+        </p:fieldset>
+
+
+
+    </h:form>
+
+
+
+</ui:composition>
+
