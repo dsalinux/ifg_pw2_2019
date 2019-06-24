@@ -16,7 +16,7 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
     private List<E> entitys;
     private Status statusTela;   
     
-    private enum Status {
+    public enum Status {
         INSERINDO,
         EDITANDO,
         PESQUISANDO
@@ -96,8 +96,19 @@ public abstract class GenericCrud<E, L extends GenericLogic<E, ?>> extends JsfUt
         return entitys;
     }
 
+    public void setEntitys(List<E> entitys) {
+        this.entitys = entitys;
+    }
+    
     public String getStatusTela() {
         return statusTela.name();
+    }
+
+    public void setStatus(Status statusTela) {
+        this.statusTela = statusTela;
+    }
+    public Status getStatus(){
+        return this.statusTela;
     }
 
     public Class<E> getEntityClass() {

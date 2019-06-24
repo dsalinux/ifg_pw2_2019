@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,14 +20,17 @@ import javax.persistence.TemporalType;
 @Table(name = "fluxo_caixa")
 public class FluxoCaixa implements Serializable {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String descricao;
     
+    
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_movimento")
-    private String tipoMovimento;
+    public TipoMovimento tipoMovimento;
 
     @ManyToOne
     @JoinColumn(name = "pedido_id")
@@ -57,13 +62,7 @@ public class FluxoCaixa implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getTipo_movimento() {
-        return tipoMovimento;
-    }
-
-    public void setTipo_movimento(String tipo_movimento) {
-        this.tipoMovimento = tipo_movimento;
-    }
+   
 
     public Pedido getPedido() {
         return pedido;
@@ -97,6 +96,18 @@ public class FluxoCaixa implements Serializable {
         this.conta = conta;
     }
 
+    public TipoMovimento getTipoMovimento() {
+        return tipoMovimento;
+    }
+
+    public void setTipoMovimento(TipoMovimento tipoMovimento) {
+        this.tipoMovimento = tipoMovimento;
+    }
+
+    
+    
+    
+    
     @Override
     public int hashCode() {
         int hash = 5;
