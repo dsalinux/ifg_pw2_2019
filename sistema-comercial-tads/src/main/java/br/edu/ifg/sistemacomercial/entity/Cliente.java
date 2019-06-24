@@ -32,6 +32,7 @@ public class Cliente implements Serializable {
     private String telefone3;
     private String email;
     private String observacao;
+    private int tipoCliente;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<Endereco> enderecos;
@@ -139,7 +140,13 @@ public class Cliente implements Serializable {
         this.enderecos = enderecos;
     }
     
-    
+    public int getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(int tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
 
     @Override
     public int hashCode() {
