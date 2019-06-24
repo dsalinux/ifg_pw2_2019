@@ -22,73 +22,85 @@
                 <p:outputLabel value="Nome Fantasia"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.apelidoFantasia}"></p:inputText>
                 <p:outputLabel value="CPF"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.cpf}" maxlength="11"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.cpf}" mask="999.999.999-99"></p:inputMask>
                 <p:outputLabel value="RG"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.rg}"></p:inputText>
                 <p:outputLabel value="CNPJ"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.cnpj}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.cnpj}" mask="99.999.999/9999-99"></p:inputMask>
                 <p:outputLabel value="IE"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.inscricao}"></p:inputText>
                 <p:outputLabel value="Telefone Principal"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone1}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone1}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="Telefone Secundário"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone2}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone2}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="Telefone Comercial"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.telefone3}"></p:inputText>
+                <p:inputMask value="#{clienteBean.entity.telefone3}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="E-mail"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.email}"></p:inputText>
                 <p:outputLabel value="Observação"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.observacao}"></p:inputText>
-                <p:outputLabel value="Endereço"></p:outputLabel>
-                <p:selectOneMenu value="#{clienteBean.entity.enderecos}">
-                    <f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
-                    <f:selectItems value="#{clienteBean.clientes}" var="cat" 
-                                   itemLabel="#{cat.nome}" itemValue="#{cat}"></f:selectItems>
-                </p:selectOneMenu>
+                <h:outputText></h:outputText>
+                <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').show(); return;" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}"></p:button>
             </p:panelGrid>
+            <p:dialog header="Informações de Endereço" widgetVar="dialogEndereco" modal="true">
+                <p:panelGrid columns="2">
+                    <h:outputLabel value="Logradouro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Número"></h:outputLabel>
+                    <p:inputNumber></p:inputNumber>
+                    <h:outputLabel value="Complemento"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Bairro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <h:outputLabel value="Cep"></h:outputLabel>
+                    <p:inputMask mask="99.999-999"></p:inputMask>
+                    <h:outputLabel value="Estado"></h:outputLabel>
+                    <p:selectOneMenu >
+                        <f:selectItem itemValue="Selecione"></f:selectItem>
+                        <f:selectItems value="#{clienteBean.listaEstados}" var="uf" itemValue="#{uf.toString()}" itemLabel="#{uf.nome}"></f:selectItems>
+                    </p:selectOneMenu>
+                    <h:outputLabel value="Logradouro"></h:outputLabel>
+                    <p:inputText></p:inputText>
+                    <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').hide(); return;"></p:button>
+                </p:panelGrid>
+            </p:dialog>
+            <p:dataTable value="#{clienteBean.entity.enderecos}" var="end" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
+                <p:column>
+                    <p:commandButton icon="fa fa-trash" update="@form"
+                                     actionListener="#{clienteBean.removeEndereco(end)}">
+                        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar para sempre?" icon="fa fa-exclamation-triangle" />
+                        <p:tooltip for="@parent" value="Deletar"></p:tooltip>
+                    </p:commandButton>
+
+                    <p:commandButton icon="fa fa-edit" update="@form" 
+                                     actionListener="#{clienteBean.ediarEndereco(end)}">
+                        <p:tooltip for="@parent" value="Editar"></p:tooltip>
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Endereço">
+
+                </p:column>
+            </p:dataTable>
 
             <p:dataTable value="#{clienteBean.entitys}" var="cliente"
-                         rendered="#{clienteBean.statusTela == 'PESQUISANDO'}">
+                         rendered="#{clienteBean.statusTela == 'PESQUISANDO'}" reflow="true" rows="20" paginator="true">
 
                 <p:column width="90">
                     <si:colunaAcoes crudBean="#{clienteBean}" entity="#{cliente}"></si:colunaAcoes>
                 </p:column>                    
-                <p:column headerText="Nome">
-                    <h:outputText value="#{cliente.nome}"></h:outputText>
+                <p:column headerText="Nome/Nome Fantasia">
+                    <h:outputText value="#{cliente.apelidoFantasia == ''?cliente.nome:cliente.apelidoFantasia}"></h:outputText>
                 </p:column>
-                <p:column headerText="Nome Fantasia">
-                    <h:outputText value="#{cliente.apelidoFantasia}"></h:outputText>
-                </p:column>
-                <p:column headerText="CPF">
-                    <h:outputText value="#{cliente.cpf}"></h:outputText>
-                </p:column>
-                <p:column headerText="RG">
-                    <h:outputText value="#{cliente.rg}"></h:outputText>
-                </p:column>
-                <p:column headerText="CNPJ">
-                    <h:outputText value="#{cliente.cnpj}"></h:outputText>
-                </p:column>
-                <p:column headerText="IE">
-                    <h:outputText value="#{cliente.inscricao}"></h:outputText>
-                </p:column>
-                <p:column headerText="Telefone Principal">
-                    <h:outputText value="#{cliente.telefone1}"></h:outputText>
-                </p:column>
-                <p:column headerText="Telefone Secundário">
-                    <h:outputText value="#{cliente.telefone2}"></h:outputText>
-                </p:column>
-                <p:column headerText="Telefone Comercial">
-                    <h:outputText value="#{cliente.telefone3}"></h:outputText>
-                </p:column>
-                <p:column headerText="E-mail">
+                <p:column headerText="CPF/CNPJ">
+                    <h:outputText value="#{cliente.cpf == ''?cliente.cnpj:cliente.cpf}"></h:outputText>
+                </p:column>               
+                <p:column headerText="Telefones">
+                    <h:outputText value="#{cliente.telefone1} - #{cliente.telefone3}"></h:outputText>
+                </p:column>               
+
+                <p:column headerText="E-mail" priority="5">
                     <h:outputText value="#{cliente.email}"></h:outputText>
-                </p:column>
-                <p:column headerText="Endereço">
-                    <h:outputText value="#{cliente.endereco.nome}"></h:outputText>
-                </p:column>
-                <p:column headerText="Observação">
-                    <h:outputText value="#{cliente.observacao}"></h:outputText>
-                </p:column>
+                </p:column>                
             </p:dataTable>
         </p:fieldset>
 
