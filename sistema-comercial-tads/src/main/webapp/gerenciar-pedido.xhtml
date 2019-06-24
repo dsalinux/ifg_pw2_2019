@@ -87,7 +87,7 @@
                     <p:outputLabel value="Preço"></p:outputLabel>
                     <p:inputNumber value="#{pedidoBean.pedidoHasProduto.valor}"></p:inputNumber>
                 </p:panelGrid>
-                <p:commandButton value="Adiconar" update="pnlgPedidoProduto tblPedidoProdutos" actionListener="#{pedidoBean.adicionarProduto()}" icon="fa fa-plus"></p:commandButton>
+                <p:commandButton value="Adiconar" update="pnlgPedidoProduto tblPedidoProdutos resumopedido" actionListener="#{pedidoBean.adicionarProduto()}" icon="fa fa-plus"></p:commandButton>
             </p:dialog>
             <p:dataTable value="#{pedidoBean.entity.pedidosHasProdutos}" var="php" id="tblPedidoProdutos" rendered="#{pedidoBean.statusTela != 'PESQUISANDO'}">
                 <p:column>
@@ -108,27 +108,46 @@
                     <h:outputText value="#{php.valor * php.quantidade}"></h:outputText>
                 </p:column>
 
-            </p:dataTable>
 
+            </p:dataTable>
+            <h:panelGrid columns="2" id="resumopedido" rendered="#{pedidoBean.statusTela != 'PESQUISANDO'}">
+                <p:spacer height="15px"></p:spacer> 
+                <p:spacer height="15px"></p:spacer> 
+                <h:outputText value="Subtotal"></h:outputText>
+                <h:outputText style="color:green; font-weight: bold;" value="#{pedidoBean.entity.total}">
+                    <f:convertNumber type="currency"> </f:convertNumber>
+                </h:outputText>
+                <h:outputText value="Descontos:"></h:outputText>
+                <h:outputText style="color:green; font-weight: bold;" value="#{pedidoBean.entity.desconto}">
+                    <f:convertNumber type="currency"> </f:convertNumber>
+                </h:outputText>
+                <p:separator></p:separator>
+                <p:separator></p:separator>
+                <h:outputText value="Total:"></h:outputText>
+                <h:outputText style="color:green; font-weight: bold;" value="#{pedidoBean.entity.totalFinal}">
+                    <f:convertNumber type="currency"> </f:convertNumber>
+                </h:outputText>
+            </h:panelGrid>
+            
             <p:dataTable value="#{pedidoBean.entitys}" var="ped"
                          rendered="#{pedidoBean.statusTela == 'PESQUISANDO'}" rows="10"
-                 paginator="true"
-                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                 rowsPerPageTemplate="5,10,15">
-                
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+
                 <p:column width="100">
                     <si:colunaAcoes crudBean="#{pedidoBean}" rederedDelete="false" entity="#{ped}">
-                        
-                            <p:commandButton icon="fa #{ped.dataCancelamento == null?'fa-check-circle-o':'fa-close'}" update="@form"
+
+                        <p:commandButton icon="fa #{ped.dataCancelamento == null?'fa-check-circle-o':'fa-close'}" update="@form"
                                          actionListener="#{pedidoBean.ativarCancelar(ped)}"
                                          style="color: #{ped.dataCancelamento == null?'green':'red'}">
                             <p:tooltip for="@parent" value="#{ped.dataCancelamento == null?'Desativar':'Ativar'}"></p:tooltip>
                         </p:commandButton>    
-                        
+
                     </si:colunaAcoes>
                 </p:column>
-                
-                
+
+
                 <p:column headerText="ID Pedido">
                     <h:outputText value="#{ped.id}"></h:outputText>
                 </p:column>                    
@@ -141,8 +160,15 @@
                     </h:outputText>
                 </p:column>
 
+
+
             </p:dataTable>
-            
+
+
+
+
+
+
         </p:fieldset>
     </h:form>
 </ui:composition>

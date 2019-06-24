@@ -22,7 +22,6 @@ import javax.persistence.TemporalType;
 @Table(name = "pedido")
 public class Pedido implements Serializable {
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -30,7 +29,7 @@ public class Pedido implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-    
+
     @ManyToOne
     @JoinColumn(name = "endereco_entrega_id")
     private Endereco enderecoEntrega;
@@ -38,15 +37,15 @@ public class Pedido implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_pedido")
     private Date dataPedido;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="data_cancelamento")
+    @Column(name = "data_cancelamento")
     private Date dataCancelamento;
 
     private String observacoes;
     @Column(name = "observacoes_cliente")
     private String observacoesCliente;
-    
+
     @OneToMany(mappedBy = "pedido")
     private List<PedidoHasProduto> pedidosHasProdutos;
 
@@ -59,7 +58,7 @@ public class Pedido implements Serializable {
     public Pedido() {
         this.dataPedido = new Date();
     }
-   
+
     public Endereco getEnderecoEntrega() {
         return enderecoEntrega;
     }
@@ -76,7 +75,6 @@ public class Pedido implements Serializable {
         this.dataCancelamento = dataCancelamento;
     }
 
-
     public Integer getId() {
         return id;
     }
@@ -92,8 +90,7 @@ public class Pedido implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
+
     public Date getDataPedido() {
         return dataPedido;
     }
@@ -141,7 +138,26 @@ public class Pedido implements Serializable {
     public void setPedidosHasProdutos(List<PedidoHasProduto> pedidosHasProdutos) {
         this.pedidosHasProdutos = pedidosHasProdutos;
     }
+
+    public Double getTotal() {
+        Double total = 0D;
+        if (getPedidosHasProdutos() != null) {
+            for (PedidoHasProduto entity : getPedidosHasProdutos()) {
+                total += entity.getValor() * entity.getQuantidade();
+            }
+        }
+        return total;
+    }
     
+    public Double getTotalFinal() {
+        Double desconto = getDesconto() != null?getDesconto():0D;
+        Double total = 0D;
+        total = getTotal() - desconto;
+        return total;
+    }
+    
+ 
+
     @Override
     public int hashCode() {
         int hash = 3;
