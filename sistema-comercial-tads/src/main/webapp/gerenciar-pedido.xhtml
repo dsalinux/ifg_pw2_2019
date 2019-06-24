@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="template.xhtml"
+                xmlns:si="http://xmlns.jcp.org/jsf/composite/siscom"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
+    <h:form>
+        <p:fieldset legend="Dashboard">
+            <si:toolbar-crud crudBean="#{pedidoBean}"/>
+
+
+            <p:panelGrid columns="2" styleClass="ui-noborder" 
+                         rendered="#{pedidoBean.statusTela != 'PESQUISANDO'}">
+
+                <h:outputText value="Data Pedido"></h:outputText>
+                <h:outputText value="#{pedidoBean.entity.dataPedido}">
+                    <f:convertDateTime></f:convertDateTime>
+                </h:outputText>
+                <p:outputLabel value="Cliente"></p:outputLabel>
+                <p:selectOneMenu id="selectCliente" value="#{pedidoBean.entity.cliente}" panelStyle="width:180px"
+                                 effect="fade" var="prodPedidoCliente" style="width:160px" filter="true" filterMatchMode="startsWith">
+                    <p:ajax event="change" update="@parent"></p:ajax>
+                    <f:selectItem itemLabel="Selecione"></f:selectItem>
+                    <f:selectItems value="#{pedidoBean.clientes}" var="clie" itemLabel="#{clie.nome}" itemValue="#{clie}" />
+
+                    <p:column headerText="Nome">
+                        <h:outputText value="${prodPedidoCliente.nome}"></h:outputText>
+                    </p:column>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Endereço de Entrega" rendered="#{pedidoBean.entity.cliente != null}"></p:outputLabel>
+                <p:selectOneMenu id="selectClienteEnde" value="#{pedidoBean.entity.enderecoEntrega}" panelStyle="width:180px"
+                                 rendered="#{pedidoBean.entity.cliente != null}"
+                                 effect="fade" var="endCliente" style="width:500px" filter="true" filterMatchMode="startsWith">
+                    <f:selectItem itemLabel="Selecione"></f:selectItem>
+                    <f:selectItems value="#{pedidoBean.entity.cliente.enderecos}" var="end" itemLabel="#{end.logradouro}, #{end.numero}, #{end.bairro}" itemValue="#{end}" />
+
+                    <p:column headerText="Logradouro">
+                        <h:outputText value="${endCliente.logradouro}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Nº">
+                        <h:outputText value="${endCliente.numero}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Bairro">
+                        <h:outputText value="${endCliente.bairro}"></h:outputText>
+                    </p:column>
+                    <p:column headerText="Cidade">
+                        <h:outputText value="${endCliente.cidade}"></h:outputText>
+                    </p:column>
+
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Desconto"></p:outputLabel>
+                <p:inputText value="#{pedidoBean.entity.desconto}"></p:inputText>
+
+                <p:outputLabel value="Observação Pedido"></p:outputLabel>
+                <p:inputText value="#{pedidoBean.entity.observacoes}"></p:inputText>
+                <p:outputLabel value="Observação Cliente"></p:outputLabel>
+                <p:inputText value="#{pedidoBean.entity.observacoesCliente}"></p:inputText>
+                <h:outputText></h:outputText>
+                <p:commandButton value="Adicionar Produto" oncomplete="PF('dialodAddProduto').show();" icon="fa fa-plus"></p:commandButton>
+
+
+
+            </p:panelGrid>
+            <p:dialog header="Adicionar Produto" widgetVar="dialodAddProduto" modal="true">
+                <p:panelGrid id="pnlgPedidoProduto" columns="2" styleClass="ui-noborder">
+                    <p:outputLabel value="Produto"></p:outputLabel>
+                    <p:selectOneMenu id="advanced" value="#{pedidoBean.pedidoHasProduto.produto}" panelStyle="width:180px"
+                                     effect="fade" var="prodDetalhe" style="width:160px" filter="true" filterMatchMode="startsWith">
+
+                        <f:selectItems value="#{pedidoBean.produtos}" var="prod" itemLabel="#{prod.nome}" itemValue="#{prod}" />
+                        <p:column headerText="Nome">
+                            <h:outputText value="${prodDetalhe.nome}"></h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Marca">
+                            <h:outputText value="#{prodDetalhe.marca}" />
+                        </p:column>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Quantidade"></p:outputLabel>
+                    <p:inputText value="#{pedidoBean.pedidoHasProduto.quantidade}"></p:inputText>
+                    <p:outputLabel value="Preço"></p:outputLabel>
+                    <p:inputNumber value="#{pedidoBean.pedidoHasProduto.valor}"></p:inputNumber>
+                </p:panelGrid>
+                <p:commandButton value="Adiconar" update="pnlgPedidoProduto tblPedidoProdutos" actionListener="#{pedidoBean.adicionarProduto()}" icon="fa fa-plus"></p:commandButton>
+            </p:dialog>
+            <p:dataTable value="#{pedidoBean.entity.pedidosHasProdutos}" var="php" id="tblPedidoProdutos" rendered="#{pedidoBean.statusTela != 'PESQUISANDO'}">
+                <p:column>
+                    <p:commandButton icon="fa fa-trash" update="@form"
+                                     actionListener="#{pedidoBean.deletarPedidoHasProduto(php)}">
+                    </p:commandButton>
+                </p:column>
+                <p:column headerText="Produto">
+                    <h:outputText value="#{php.produto.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Quantidade">
+                    <h:outputText value="#{php.quantidade}"></h:outputText>
+                </p:column>
+                <p:column headerText="Preço">
+                    <h:outputText value="#{php.valor}"></h:outputText>
+                </p:column>
+                <p:column headerText="Total">
+                    <h:outputText value="#{php.valor * php.quantidade}"></h:outputText>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:dataTable value="#{pedidoBean.entitys}" var="ped"
+                         rendered="#{pedidoBean.statusTela == 'PESQUISANDO'}" rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15">
+                
+                <p:column width="100">
+                    <si:colunaAcoes crudBean="#{pedidoBean}" rederedDelete="false" entity="#{ped}">
+                        
+                            <p:commandButton icon="fa #{ped.dataCancelamento == null?'fa-check-circle-o':'fa-close'}" update="@form"
+                                         actionListener="#{pedidoBean.ativarCancelar(ped)}"
+                                         style="color: #{ped.dataCancelamento == null?'green':'red'}">
+                            <p:tooltip for="@parent" value="#{ped.dataCancelamento == null?'Desativar':'Ativar'}"></p:tooltip>
+                        </p:commandButton>    
+                        
+                    </si:colunaAcoes>
+                </p:column>
+                
+                
+                <p:column headerText="ID Pedido">
+                    <h:outputText value="#{ped.id}"></h:outputText>
+                </p:column>                    
+                <p:column headerText="Nome">
+                    <h:outputText value="#{ped.cliente.nome}"></h:outputText>
+                </p:column>
+                <p:column headerText="Data">
+                    <h:outputText value="#{ped.dataPedido}">
+                        <f:convertDateTime></f:convertDateTime>
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+            
+        </p:fieldset>
+    </h:form>
+</ui:composition>
+

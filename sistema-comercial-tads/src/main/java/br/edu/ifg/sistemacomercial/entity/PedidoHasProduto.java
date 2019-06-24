@@ -6,8 +6,10 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="pedido_has_produto")
 public class PedidoHasProduto implements Serializable {
 
     @EmbeddedId
@@ -53,6 +55,10 @@ public class PedidoHasProduto implements Serializable {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+        if(id == null){
+            id =  new PedidoHasProdutoPk();
+        }
+        id.setProdutoId(produto.getId());
     }
 
     public Pedido getPedido() {
@@ -61,6 +67,10 @@ public class PedidoHasProduto implements Serializable {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+        if(id == null){
+            id =  new PedidoHasProdutoPk();
+        }
+        id.setPedidoId(pedido.getId());
     }
 
     @Override
