@@ -31,6 +31,8 @@ public class FluxoCaixaLogic implements GenericLogic<FluxoCaixa, Integer> {
             throw new NegocioException("Tipo de conta é obrigatório");
         }
         
+        
+        
         dao.salvar(entity);
         return null;
     }
@@ -51,6 +53,12 @@ public class FluxoCaixaLogic implements GenericLogic<FluxoCaixa, Integer> {
     }
     
     public List<FluxoCaixa> buscarNoPeriodo(Date dataInicio, Date dataFim) throws  NegocioException, SistemaException {
+        if(dataInicio==null){
+            throw new NegocioException("Informe a data de início!");
+        }
+        if(dataFim==null){
+            throw new NegocioException("Informe a data final!");
+        }
         return dao.buscarNoPeriodo(dataInicio, dataFim);
     }
 }
