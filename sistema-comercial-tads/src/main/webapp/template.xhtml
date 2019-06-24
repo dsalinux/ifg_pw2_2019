@@ -37,10 +37,10 @@
         <nav class="sidebar sidebar-mob">
             <div class="usuario">
                 <div class="foto">
-                    <img src="https://www.gravatar.com/avatar/382d79b61a34ba561e61ef85d8119d25?s=56&amp;d=mp"></img>
+                    <img src="https://www.gravatar.com/avatar/#{usuario.emailHash}?s=56&amp;d=mp"></img>
                 </div>
                 <div class="nome">
-                    João Pereira da Silva
+                    #{usuario.nome}
                 </div>
             </div>
             <ul>
@@ -120,8 +120,9 @@
                     <a href="#" class="sidebar-item submenu-toogle" submenu_target="submenu-configuracao">
                         <i class="fa fa-fw fa-gear"></i>Configurações<i class="fa fa-fw fa-angle-down"></i>
                     </a>
+
                     <ul class="submenu" id="submenu-configuracao">
-                        
+
                         <li>
                             <a href="gerenciar-permissao.xhtml" class="sidebar-item #{view.viewId.endsWith('gerenciar-permissao.xhtml')?'active':''}">
                                 <i class="fa fa-fw fa-list"></i>Gerenciar Permissões
@@ -135,7 +136,15 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="sair.xhtml" class="sidebar-item #{view.viewId.endsWith('sair.xhtml')?'active':''}">
+                        <i class="fa fa-fw fa-sign-out"></i>Sair
+                    </a>
+                </li>
+
             </ul>
+
+
         </nav>
 
         <main>
