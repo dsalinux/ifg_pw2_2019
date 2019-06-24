@@ -9,12 +9,28 @@ import br.edu.ifg.sistemacomercial.logic.ContaLogic;
 import br.edu.ifg.sistemacomercial.logic.FluxoCaixaLogic;
 import br.edu.ifg.sistemacomercial.util.exception.NegocioException;
 import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
+import static java.time.temporal.TemporalQueries.localDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
+import static org.hibernate.annotations.common.util.impl.LoggerFactory.logger;
+import static org.hibernate.internal.CoreLogging.logger;
+import static org.hibernate.jpa.internal.HEMLogging.logger;
+import static org.hibernate.jpa.internal.HEMLogging.logger;
 
 @Named
 @SessionScoped
@@ -24,8 +40,27 @@ public class FluxoCaixaBean extends GenericCrud<FluxoCaixa, FluxoCaixaLogic> {
     private ContaLogic contaLogic;
     @Inject
     private FluxoCaixaLogic logic;
+    
+    LocalDateTime data = LocalDateTime.now();
+    LocalDateTime diaInicio = data.with(TemporalAdjusters.firstDayOfMonth());
+    LocalDateTime diaFim = data.with(TemporalAdjusters.lastDayOfMonth());
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private Date dataInicio;
     private Date dataFim;
+
+    public FluxoCaixaBean() {
+        try {
+            this.dataInicio = formatter.parse(diaInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } catch (ParseException ex) {
+            Logger.getLogger(FluxoCaixaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         try {
+            this.dataFim = formatter.parse(diaFim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        } catch (ParseException ex) {
+            Logger.getLogger(FluxoCaixaBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 
     @Override
     public void pesquisar() {
@@ -33,12 +68,20 @@ public class FluxoCaixaBean extends GenericCrud<FluxoCaixa, FluxoCaixaLogic> {
         try {
             if(!getStatus().equals(GenericCrud.Status.PESQUISANDO)){
                 setStatus(GenericCrud.Status.PESQUISANDO);
+                
                 return;
             }
+            
+            //setEntitys(logic.buscarNoPeriodo(dataInicio, dataFim));
+            
             setEntitys(logic.buscarNoPeriodo(dataInicio, dataFim));
             if(getEntitys() == null || getEntitys().isEmpty()){
                 addMensagemAviso("Nenhum registro cadastrado.");
             }
+            
+           
+            
+            
         } catch (NegocioException ex) {
             addMensagemErro(ex);
         } catch(SistemaException ex){
@@ -99,6 +142,7 @@ public class FluxoCaixaBean extends GenericCrud<FluxoCaixa, FluxoCaixaLogic> {
         this.dataInicio = dataInicio;
     }
 
+    
     public Date getDataFim() {
         return dataFim;
     }
@@ -117,4 +161,6 @@ public class FluxoCaixaBean extends GenericCrud<FluxoCaixa, FluxoCaixaLogic> {
         return items;
     }
 
+   
+    
 }
