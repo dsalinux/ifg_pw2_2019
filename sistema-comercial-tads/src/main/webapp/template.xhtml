@@ -135,7 +135,44 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#" class="sidebar-item submenu-toogle" submenu_target="submenu-relatorio">
+                        <i class="fa fa-fw fa-gear"></i>Relatórios<i class="fa fa-fw fa-angle-down"></i>
+                    </a>
+                    <ul class="submenu" id="submenu-relatorio">
 
+                        <li>
+                            <a href="relatorio-usuario.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-usuario.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-list"></i>Relatorio Usuario
+                            </a>
+                        </li>
+                        <li>
+                            <a href="relatorio-cliente.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-cliente.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-sliders"></i>Relatorio Cliente
+                            </a>
+                        </li>
+                        <li>
+                            <a href="relatorio-categoria.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-categoria.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-sliders"></i>Relatorio Categoria
+                            </a>
+                        </li>
+                        <li>
+                            <a href="relatorio-produto.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-produto.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-sliders"></i>Relatorio Produto
+                            </a>
+                        </li>
+                        <li>
+                            <a href="relatorio-fornecedor.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-fornecedor.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-sliders"></i>Relatorio Fornecedor
+                            </a>
+                        </li>
+                        <li>
+                            <a href="relatorio-pedido.xhtml" class="sidebar-item #{view.viewId.endsWith('relatorio-pedido.xhtml')?'active':''}">
+                                <i class="fa fa-fw fa-sliders"></i>Relatorio Pedido
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li>
                     <a href="sair.xhtml" class="sidebar-item #{view.viewId.endsWith('sair.xhtml')?'active':''}">
                         <i class="fa fa-fw fa-sign-out"></i>Sair
