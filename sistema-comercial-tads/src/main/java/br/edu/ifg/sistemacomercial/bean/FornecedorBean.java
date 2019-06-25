@@ -8,8 +8,6 @@ package br.edu.ifg.sistemacomercial.bean;
 import br.edu.ifg.sistemacomercial.entity.Fornecedor;
 import br.edu.ifg.sistemacomercial.logic.FornecedorLogic;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,9 +15,19 @@ import javax.inject.Named;
 @Named
 @SessionScoped
 public class FornecedorBean extends GenericCrud<Fornecedor, FornecedorLogic>{
-
+    
     @Inject
     private FornecedorLogic logic;
+    
+    private int tipoFornecedor;
+
+    public int getTipoFornecedor() {
+        return tipoFornecedor;
+    }
+
+    public void setTipoFornecedor(int tipoFornecedor) {
+        this.tipoFornecedor = tipoFornecedor;
+    }
     
     @Override
     public FornecedorLogic getLogic() {
