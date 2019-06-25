@@ -4,7 +4,6 @@ import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
-import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 
 public class PersistenceFactory {

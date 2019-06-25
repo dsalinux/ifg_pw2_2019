@@ -2,8 +2,6 @@ package br.edu.ifg.sistemacomercial.logic;
 
 import br.edu.ifg.sistemacomercial.dao.PedidoDAO;
 import br.edu.ifg.sistemacomercial.dao.PedidoHasProdutoDAO;
-import br.edu.ifg.sistemacomercial.entity.Cliente;
-import br.edu.ifg.sistemacomercial.entity.Endereco;
 import br.edu.ifg.sistemacomercial.entity.Pedido;
 import br.edu.ifg.sistemacomercial.entity.PedidoHasProduto;
 import br.edu.ifg.sistemacomercial.entity.Usuario;

@@ -18,16 +18,34 @@ public class FornecedorLogic implements GenericLogic<Fornecedor, Integer> {
         if("".equals(entity.getNome().trim())){
             throw new NegocioException("Nome do fornecedor é obrigatório.");
         }
-        if(!Assert.isCnpjValido(entity.getCnpj())){
-            throw new NegocioException("CNPJ inválido.");
+        if(entity.getCnpj()== null && entity.getCpf()== null){
+            if(!Assert.isCnpjValido(entity.getCnpj())){
+                throw new NegocioException("CNPJ inválido.");
+            }
+            if(!Assert.isCpf(entity.getCpf())){
+                 throw new NegocioException("CPF inválido.");
+            }
+        }else{
+            if(entity.getCnpj()== null && !Assert.isCpf(entity.getCpf())){
+                throw new NegocioException("CPF inválido.");
+            }
+            if(entity.getCpf()== null && !Assert.isCnpjValido(entity.getCnpj())){
+                throw new NegocioException("CNPJ inválido.");
+            }
+            
         }
-        if(!Assert.isCpf(entity.getCpf())){
-             throw new NegocioException("CPF inválido.");
-        }
+        if(entity.getCnpj()!= null && entity.getCpf() != null && Assert.isCnpjValido(entity.getCnpj())){
+            entity.setCpf("");
+            entity.setRg("");
+         }
+        if(entity.getCnpj()!= null && entity.getCpf() != null && Assert.isCpf(entity.getCpf())){           
+            entity.setCnpj("");        
+ 
+         }
          if(!Assert.isValidEmail(entity.getEmail())){
              throw new NegocioException("Email inválido.");
         }                  
-        
+        if(entity.getCnpj()== null) entity.setCnpj("");
         dao.salvar(entity);
         return null;    
     }

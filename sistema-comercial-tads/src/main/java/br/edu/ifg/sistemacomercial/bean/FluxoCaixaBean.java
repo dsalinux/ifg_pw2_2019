@@ -1,24 +1,17 @@
 package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.entity.Conta;
-//import br.edu.ifg.sistemacomercial.entity.Pedido;
 import br.edu.ifg.sistemacomercial.entity.FluxoCaixa;
 import br.edu.ifg.sistemacomercial.entity.TipoMovimento;
 import br.edu.ifg.sistemacomercial.logic.ContaLogic;
-//import br.edu.ifg.sistemacomercial.logic.PedidoLogic;
 import br.edu.ifg.sistemacomercial.logic.FluxoCaixaLogic;
 import br.edu.ifg.sistemacomercial.util.exception.NegocioException;
 import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
-import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import static java.time.temporal.TemporalQueries.localDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,10 +20,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
-import static org.hibernate.annotations.common.util.impl.LoggerFactory.logger;
-import static org.hibernate.internal.CoreLogging.logger;
-import static org.hibernate.jpa.internal.HEMLogging.logger;
-import static org.hibernate.jpa.internal.HEMLogging.logger;
 
 @Named
 @SessionScoped

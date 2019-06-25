@@ -1,15 +1,10 @@
-
 package br.edu.ifg.sistemacomercial.entity;
-
-
 
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
-
 
 @Entity
 @Table(name = "usuario_has_permissao")

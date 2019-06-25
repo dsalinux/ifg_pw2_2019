@@ -1,11 +1,9 @@
 package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.entity.Cliente;
-import br.edu.ifg.sistemacomercial.entity.FluxoCaixa;
 import br.edu.ifg.sistemacomercial.entity.Pedido;
 import br.edu.ifg.sistemacomercial.entity.PedidoHasProduto;
 import br.edu.ifg.sistemacomercial.entity.Produto;
-import br.edu.ifg.sistemacomercial.entity.TipoMovimento;
 import br.edu.ifg.sistemacomercial.logic.ClienteLogic;
 import br.edu.ifg.sistemacomercial.logic.EnderecoLogic;
 import br.edu.ifg.sistemacomercial.logic.PedidoLogic;

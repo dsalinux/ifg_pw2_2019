@@ -1,10 +1,8 @@
 package br.edu.ifg.sistemacomercial.dao;
 
 import br.edu.ifg.sistemacomercial.entity.FluxoCaixa;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
 public class FluxoCaixaDAO extends GenericDAO<FluxoCaixa, Integer>{

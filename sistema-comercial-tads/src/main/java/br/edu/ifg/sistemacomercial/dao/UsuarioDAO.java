@@ -1,8 +1,6 @@
 package br.edu.ifg.sistemacomercial.dao;
 
 import br.edu.ifg.sistemacomercial.entity.Usuario;
-import java.sql.SQLException;
-import java.util.List;
 import javax.persistence.NoResultException;
 
 public class UsuarioDAO extends GenericDAO<Usuario, Integer>{

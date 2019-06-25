@@ -2,9 +2,7 @@ package br.edu.ifg.sistemacomercial.bean;
 
 import br.edu.ifg.sistemacomercial.dao.UsuarioDAO;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
-import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
 import java.io.Serializable;
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;

@@ -1,4 +1,3 @@
-
 package br.edu.ifg.sistemacomercial.entity;
 
 import java.io.Serializable;

@@ -61,16 +61,22 @@
 
                 <p:column width="100"> 
                     <si:colunaAcoes crudBean="#{movimentoEstoqueBean}" entity="#{movimentoEstoque}"></si:colunaAcoes>
-                </p:column>      
+                </p:column>   
+                
+                <p:column headerText="Tipo Movimento">
+                    <div style="color: #{movimentoEstoque.tipoMovimento == 'SAIDA'?'red':'green'}">
+                        <h:outputText value="#{movimentoEstoque.tipoMovimento.nome}"></h:outputText>
+                        <i class="fa #{movimentoEstoque.tipoMovimento == 'SAIDA'?'fa-arrow-up':'fa-arrow-down'} "></i>
+                    </div>
+                </p:column>
+                
                  <p:column headerText="Produto">
                     <h:outputText value="#{movimentoEstoque.produto.nome}"></h:outputText>
                 </p:column>
+                
                 <p:column headerText="Fornecedor">
                     <h:outputText value="#{movimentoEstoque.fornecedor.nome}"></h:outputText>
-                </p:column>
-                <p:column headerText="Tipo Movimento">
-                    <h:outputText value="#{movimentoEstoque.tipoMovimento.nome}"></h:outputText>
-                </p:column>
+                </p:column>                
                 
                 <p:column headerText="Quantidade">
                     <h:outputText value="#{movimentoEstoque.quantidadeRecebida}"></h:outputText>
