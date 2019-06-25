@@ -10,19 +10,20 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class ClienteBean extends GenericCrud<Cliente, ClienteLogic>{
-        
+public class ClienteBean extends GenericCrud<Cliente, ClienteLogic> {
+
     @Inject
     private ClienteLogic logic;
+
     
+
     @Override
     public ClienteLogic getLogic() {
         return logic;
     }
-    
-    public EstadosEnum[] getListaEstados(){
+
+    public EstadosEnum[] getListaEstados() {
         return EstadosEnum.values();
     }
-    
-    
+
 }

@@ -14,21 +14,27 @@
         <p:fieldset legend="Dashboard">
             <si:toolbar-crud crudBean="#{clienteBean}"/>
 
-            <p:panelGrid columns="2" styleClass="ui-noborder" 
-                         rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
+            <p:panelGrid columns="2" styleClass="ui-noborder" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
+
+                <p:outputLabel value="Tipo de CLiente:"></p:outputLabel>
+                <p:selectOneButton value="#{clienteBean.tipoCliente}">
+                    <f:selectItem itemLabel="Pessoa Física" itemValue="1" />
+                    <f:selectItem itemLabel="Pessoa Jurídica" itemValue="0" />
+                    <p:ajax update="@form"></p:ajax>
+                </p:selectOneButton>
 
                 <p:outputLabel value="Nome"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.nome}"></p:inputText>
-                <p:outputLabel value="Nome Fantasia"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.apelidoFantasia}"></p:inputText>
-                <p:outputLabel value="CPF"></p:outputLabel>
-                <p:inputMask value="#{clienteBean.entity.cpf}" mask="999.999.999-99"></p:inputMask>
-                <p:outputLabel value="RG"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.rg}"></p:inputText>
-                <p:outputLabel value="CNPJ"></p:outputLabel>
-                <p:inputMask value="#{clienteBean.entity.cnpj}" mask="99.999.999/9999-99"></p:inputMask>
-                <p:outputLabel value="IE"></p:outputLabel>
-                <p:inputText value="#{clienteBean.entity.inscricao}"></p:inputText>
+                <p:outputLabel value="Nome Fantasia" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:outputLabel>
+                <p:inputText value="#{clienteBean.entity.apelidoFantasia}" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:inputText>
+                <p:outputLabel value="CPF" rendered="#{clienteBean.entity.tipoCliente == '1'}"></p:outputLabel>
+                <p:inputMask value="#{clienteBean.entity.cpf}" mask="999.999.999-99" rendered="#{clienteBean.entity.tipoCliente == '1'}"></p:inputMask>
+                <p:outputLabel value="RG" rendered="#{clienteBean.entity.tipoCliente == '1'}"></p:outputLabel>
+                <p:inputText value="#{clienteBean.entity.rg}" rendered="#{clienteBean.entity.tipoCliente == '1'}"></p:inputText>
+                <p:outputLabel value="CNPJ" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:outputLabel>
+                <p:inputMask value="#{clienteBean.entity.cnpj}" mask="99.999.999/9999-99" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:inputMask>
+                <p:outputLabel value="IE" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:outputLabel>
+                <p:inputText value="#{clienteBean.entity.inscricao}" rendered="#{clienteBean.entity.tipoCliente == '0'}"></p:inputText>
                 <p:outputLabel value="Telefone Principal"></p:outputLabel>
                 <p:inputMask value="#{clienteBean.entity.telefone1}" mask="(99) 99999-9999"></p:inputMask>
                 <p:outputLabel value="Telefone Secundário"></p:outputLabel>
@@ -40,29 +46,28 @@
                 <p:outputLabel value="Observação"></p:outputLabel>
                 <p:inputText value="#{clienteBean.entity.observacao}"></p:inputText>
                 <h:outputText></h:outputText>
+
                 <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').show(); return;" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}"></p:button>
-            </p:panelGrid>
-            <p:dialog header="Informações de Endereço" widgetVar="dialogEndereco" modal="true">
-                <p:panelGrid columns="2">
+                
+                <p:dialog header="Informações de Endereço" widgetVar="dialogEndereco" modal="true">
+                <p:panelGrid columns="2">                    
                     <h:outputLabel value="Logradouro"></h:outputLabel>
-                    <p:inputText></p:inputText>
+                    <p:inputText value=""></p:inputText>
                     <h:outputLabel value="Número"></h:outputLabel>
-                    <p:inputNumber></p:inputNumber>
+                    <p:inputText value=""></p:inputText>
                     <h:outputLabel value="Complemento"></h:outputLabel>
-                    <p:inputText></p:inputText>
+                    <p:inputText value=""></p:inputText>
                     <h:outputLabel value="Bairro"></h:outputLabel>
-                    <p:inputText></p:inputText>
+                    <p:inputText value=""></p:inputText>
                     <h:outputLabel value="Cep"></h:outputLabel>
-                    <p:inputMask mask="99.999-999"></p:inputMask>
+                    <p:inputMask value="" mask="99.999-999"></p:inputMask>
                     <h:outputLabel value="Estado"></h:outputLabel>
                     <p:selectOneMenu >
                         <f:selectItem itemValue="Selecione"></f:selectItem>
                         <f:selectItems value="#{clienteBean.listaEstados}" var="uf" itemValue="#{uf.toString()}" itemLabel="#{uf.nome}"></f:selectItems>
                     </p:selectOneMenu>
-                    <h:outputLabel value="Logradouro"></h:outputLabel>
-                    <p:inputText></p:inputText>
                     <p:button value="Adicionar Endereço" onclick="PF('dialogEndereco').hide(); return;"></p:button>
-                </p:panelGrid>
+                </p:panelGrid>                
             </p:dialog>
             <p:dataTable value="#{clienteBean.entity.enderecos}" var="end" rendered="#{clienteBean.statusTela != 'PESQUISANDO'}">
                 <p:column>
@@ -73,7 +78,7 @@
                     </p:commandButton>
 
                     <p:commandButton icon="fa fa-edit" update="@form" 
-                                     actionListener="#{clienteBean.ediarEndereco(end)}">
+                                     actionListener="#{clienteBean.editarEndereco(end)}">
                         <p:tooltip for="@parent" value="Editar"></p:tooltip>
                     </p:commandButton>
                 </p:column>
@@ -81,7 +86,8 @@
 
                 </p:column>
             </p:dataTable>
-
+            </p:panelGrid>
+            
             <p:dataTable value="#{clienteBean.entitys}" var="cliente"
                          rendered="#{clienteBean.statusTela == 'PESQUISANDO'}" reflow="true" rows="20" paginator="true">
 
@@ -96,7 +102,8 @@
                 </p:column>               
                 <p:column headerText="Telefones">
                     <h:outputText value="#{cliente.telefone1} - #{cliente.telefone3}"></h:outputText>
-                </p:column>               
+                </p:column>          
+
 
                 <p:column headerText="E-mail" priority="5">
                     <h:outputText value="#{cliente.email}"></h:outputText>
