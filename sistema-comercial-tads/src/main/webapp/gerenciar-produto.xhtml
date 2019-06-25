@@ -11,7 +11,7 @@
     <h:head></h:head><!-- Alguns problemas no layout do Primefaces -->
 
     <h:form>
-        <p:fieldset legend="Dashboard">
+        <p:fieldset legend="#{produtoBean.statusTela == 'PESQUISANDO'?'Pesquisa de':produtoBean.statusTela == 'INSERINDO'?'Cadastro de':'Editando'} Produto">
             <si:toolbar-crud crudBean="#{produtoBean}"/>
 
             <p:panelGrid columns="2" styleClass="ui-noborder" 

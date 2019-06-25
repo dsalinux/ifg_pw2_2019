@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "cliente")
@@ -32,6 +33,7 @@ public class Cliente implements Serializable {
     private String telefone3;
     private String email;
     private String observacao;
+    @Transient
     private int tipoCliente;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
