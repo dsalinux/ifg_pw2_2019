@@ -14,10 +14,12 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -27,7 +29,7 @@ import org.primefaces.model.StreamedContent;
 @SessionScoped
 public class RelatorioBean extends JsfUtil {
 
-    @Inject
+    @PersistenceContext
     private EntityManager entityManager;
 
     private Connection connection;

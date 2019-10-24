@@ -14,17 +14,17 @@ public class LoginPhaseListener implements PhaseListener {
 
     @Override
     public void afterPhase(PhaseEvent event) {
-        facesContext = event.getFacesContext();
-        String viewId = facesContext.getViewRoot().getViewId();
-
-        NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
-        boolean paginaLogin = viewId.lastIndexOf("login") > -1;
-
-        if (existeUsuarioLogado() && paginaLogin) {
-            nh.handleNavigation(facesContext, null, "/index?faces-redirect=true");
-        } else if (!existeUsuarioLogado() && !paginaLogin) {
-            nh.handleNavigation(facesContext, null, "/login?faces-redirect=true");
-        }
+//        facesContext = event.getFacesContext();
+//        String viewId = facesContext.getViewRoot().getViewId();
+//
+//        NavigationHandler nh = facesContext.getApplication().getNavigationHandler();
+//        boolean paginaLogin = viewId.lastIndexOf("login") > -1;
+//
+//        if (existeUsuarioLogado() && paginaLogin) {
+//            nh.handleNavigation(facesContext, null, "/index?faces-redirect=true");
+//        } else if (!existeUsuarioLogado() && !paginaLogin) {
+//            nh.handleNavigation(facesContext, null, "/login?faces-redirect=true");
+//        }
     }
 
     public boolean existeUsuarioLogado() {
