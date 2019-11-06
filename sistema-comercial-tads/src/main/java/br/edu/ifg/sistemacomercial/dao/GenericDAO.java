@@ -1,5 +1,6 @@
 package br.edu.ifg.sistemacomercial.dao;
 
+import br.edu.ifg.sistemacomercial.util.PersistenceFactory;
 import br.edu.ifg.sistemacomercial.util.exception.SistemaException;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class GenericDAO<E, ID extends Serializable> implements Serializable {
 
-    @PersistenceContext
+    @Inject
     private EntityManager entityManager;
 
     public E salvar(E entity) throws SistemaException {

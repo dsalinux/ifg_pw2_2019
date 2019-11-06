@@ -4,11 +4,14 @@ import br.edu.ifg.sistemacomercial.entity.Permissao;
 import br.edu.ifg.sistemacomercial.entity.Usuario;
 import br.edu.ifg.sistemacomercial.logic.PermissaoLogic;
 import br.edu.ifg.sistemacomercial.logic.UsuarioLogic;
+import java.nio.file.attribute.UserPrincipal;
 import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Named
 @SessionScoped
@@ -64,6 +67,15 @@ public class UsuarioBean extends GenericCrud<Usuario, UsuarioLogic>{
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public Usuario getLoggedUser(){
+        Usuario usuario = null;
+        UserDetails user = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if(user instanceof Usuario){
+            usuario = (Usuario) user;
+        }
+        return usuario;
     }
     
     @Override

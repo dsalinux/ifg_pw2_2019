@@ -1,7 +1,6 @@
 package br.edu.ifg.sistemacomercial.util;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -14,12 +13,12 @@ public class PersistenceFactory {
 
     Flyway flyway;
     
-    @Bean
     public EntityManagerFactory emf(){
         return Persistence.createEntityManagerFactory("sistema_comercial_tads_PU");
     }
     
     @Bean
+    @Produces
     public EntityManager getEntityManager(){
         EntityManager entityManager;
                 

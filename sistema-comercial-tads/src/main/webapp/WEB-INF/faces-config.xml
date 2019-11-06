@@ -7,9 +7,6 @@
     <listener>
         <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
     </listener>
-    <lifecycle>
-        <phase-listener>br.edu.ifg.sistemacomercial.phaselistener.LoginPhaseListener</phase-listener>
-    </lifecycle>
     <resource-env-ref>
         <resource-env-ref-name>BeanManager</resource-env-ref-name>
         <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>

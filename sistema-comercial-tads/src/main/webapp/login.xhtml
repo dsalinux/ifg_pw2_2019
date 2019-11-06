@@ -3,20 +3,22 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Blog Benigno Sales - Exemplo Login - Página Inicial</title>         
+        <title>Login - Sistema Comercial</title>         
     </h:head>
     <h:body>
         <p:dialog visible="true" width="600" height="500" header="Acessar o Sistema" showHeader="false" modal="true" resizable="false">            
-            <h:panelGrid style="margin: 0 auto;"><h:outputText styleClass="fa fa-lock fa-5x"/></h:panelGrid>
-            <h:form id="formLogin">
-                <h:panelGrid cellspacing="10">
-                    Digite seu usuário e senha para ter acesso ao sistema:                    
-                    <p:messages id="messagesLogin"/>
-                    <p:inputText placeholder="Usuário" value="#{loginBean.email}" size="40" required="true" requiredMessage="Campo Login é obrigatório"/>
-                    <p:password placeholder="Senha" value="#{loginBean.senha}" size="40" required="true" requiredMessage="Campo Senha é obrigatório"/>
-                    <p:commandButton value="Log In" action="#{loginBean.logIn()}" update="messagesLogin"/>
+            <h:form prependId="false">
+                <h:panelGrid style="margin: 0 auto;" columns="1">
+                    <h:outputText styleClass="fa fa-lock fa-5x"/>
+
+                    <p:inputText id="username" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" placeholder="Usuário"/>
+                    <p:password id="password" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" placeholder="Senha"/>
+
+                    <p:commandButton ajax="false" value="Submeter"></p:commandButton>
                 </h:panelGrid>
-            </h:form>
+                
+              </h:form>
         </p:dialog>
+
     </h:body>
 </html>

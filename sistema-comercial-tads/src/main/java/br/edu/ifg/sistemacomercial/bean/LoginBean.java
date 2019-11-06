@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Named
 @SessionScoped
@@ -38,6 +39,7 @@ public class LoginBean implements Serializable{
     }
 
     public String logOff() {
+        SecurityContextHolder.clearContext();
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
         session.invalidate();
